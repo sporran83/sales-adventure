@@ -28,11 +28,17 @@ So far, you have been working this opportunity for <<print $sales_cycle>> days.
 
 
 :: UserStylesheet[stylesheet]
+
+
 html {
   /* Vertical colour gradient */
-  background-image: linear-gradient(to bottom,  gainsboro, silver);
-  background-image: -webkit-linear-gradient(top,  gainsboro, silver);
+  /*background-image: linear-gradient(to bottom,  gainsboro, silver);
+  background-image: -webkit-linear-gradient(top,  gainsboro, silver);*/
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
   background-attachment: fixed;
+
+
+
 
   /* Fallback colour */
   background-color: silver;
@@ -46,12 +52,14 @@ body {
   text-align: center;
 }
 
+
+
 #passages {
   /* Box background (white with 70% opacity) */
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 1);
 
   /* Border */
-  border: 2px solid white;
+  border: 2px solid black;
 
   /* Rounded corners */
   border-radius: 1em;
@@ -75,7 +83,9 @@ body {
   /* Text formatting */
   color: black;
   font-size: 100%;
-  text-align:justify;
+  font-family: 'Raleway', sans-serif;
+  text-align:left;
+  line-height: 1.3em;
 }
 
 /* No sidebar */
@@ -84,11 +94,19 @@ body {
 }
 
 /* Links */
+a {
+  color: rgb(252,194,0) !important;
+}
+a:hover, a:focus {
+  filter: brightness(1.1);
+  text-decoration: none;
+}
+
 a.internalLink, a.externalLink {
-  color: royalblue;
+  color: rgb(255,219,88);
 }
 a.internalLink:hover, a.externalLink:hover {
-  color: deepskyblue;
+  color: rgb(255,204,51);
   text-decoration: none;
 }
 
@@ -106,3 +124,172 @@ a.internalLink:hover, a.externalLink:hover {
   #passages { width: 90%; }
 }
 
+
+/* Test CSS */
+
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
+
+
+
+.toast__container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.toast__cell{
+  display:inline-block;
+}
+
+.add-margin{
+  margin-top:20px;
+}
+
+.toast__svg{
+  fill:#fff;
+}
+
+.toast {
+  text-align:left;
+    padding: 0px 0;
+    background-color:rgba(200, 200, 200, .2);
+    border-radius:4px;
+    /* max-width: 500px; */
+    top: 0px;
+    position:relative;
+    box-shadow: 1px 7px 5px -5px rgba(0,0,0,0.2);
+}
+
+
+.toast:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  border-top-left-radius:4px;
+  border-bottom-left-radius: 4px;
+
+}
+
+.toast__icon{
+  position:absolute;
+  top:50%;
+  left:22px;
+  transform:translateY(-50%);
+  width:14px;
+  height:14px;
+  padding: 7px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.toast__type {
+  color: #3e3e3e;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.toast__message {
+    font-size: 14px;
+    margin-top: 0;
+  margin-bottom: 0;
+    color: #878787;
+}
+
+.toast__content{
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.toast__close {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 14px;
+    cursor:pointer;
+    height: 14px;
+  fill:#878787;
+    transform: translateY(-50%);
+}
+
+.toast--green .toast__icon{
+  background-color:#2BDE3F;
+}
+
+.toast--green:before{
+  background-color:#2BDE3F;
+}
+
+.toast--blue .toast__icon{
+  background-color:#1D72F3;
+}
+
+.toast--blue:before{
+  background-color:#1D72F3;
+}
+
+.toast--silver:before{
+  background-color:#silver;
+}
+
+.toast--yellow .toast__icon{
+  background-color:#FFC007;
+}
+
+.toast--yellow:before{
+  background-color:#FFC007;
+}
+
+.speech-bubble {
+  position: relative;
+  background: blue;
+  border-radius: .4em;
+  color: #fff;
+  padding: 10px
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 0.469em solid transparent;
+  border-right-color: blue;
+  border-left: 0;
+  margin-top: -0.469em;
+  margin-left: -0.469em;
+}
+
+
+.speech {
+  // layout
+  position: relative;
+  max-width: 30em;
+  
+  // looks
+  background-color: pink !important;
+  padding: 1.125em 1.5em;
+  border-radius: 1rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.speech::before {
+  // layout
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 100%;
+  left: 1.5em; // offset should move with padding of parent
+  border: .75rem solid transparent;
+  border-top: none;
+
+  // looks
+  border-bottom-color: #fff;
+  filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+}

@@ -23,11 +23,12 @@ You take a final sip of coffee and check the time. You still have a few minutes 
 :: Inbound Lead
 You notice an unread email in the inbox - a new lead!
 
-<blockquote>"Hello. We've heard about your product and we would like some information."
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hello. We've heard about your product and we would like some information.
 
-Regards,
-<<print $client_PM_name>>"
-</blockquote>\
+    Regards,
+<<print $client_PM_name>></p>
+  </div></div>
 
 You briefly consider what to do.
 
@@ -40,26 +41,35 @@ This won't take a moment. Easier to deal with it now and then it's done, right? 
 
 You hit Reply and start typing.
 
-//"Hi <<print $client_PM_name>>,
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi <<print $client_PM_name>>,
 
-Thanks for your email. I'll be happy to help you with this."//
+Thanks for your email. I'll be happy to help you with this.</p>
+  </div></div>
 
 You briefly consider what else to write. As usual, there isn't much to go on.
 
-[[Send a few select items about the product from your internal marketing repository|Send Materials][$sales_cycle to $sales_cycle + 3]]
-[[Suggest a quick meeting to discuss|Suggest Meeting][$sales_cycle to $sales_cycle + 1]]
+* [[Send a few select items about the product from your internal marketing repository|Send Materials][$sales_cycle to $sales_cycle + 3]]
+* [[Suggest a quick meeting to discuss|Suggest Meeting][$sales_cycle to $sales_cycle + 1]]
 
 :: Send Materials
 <<if visited("Long Reply") is 1>>Having spent a bit of time researching, you select a couple of relevant case studies from similar institutions, a product brochure and a link to some demo videos on the company YouTube channel.
 
 You finish the email:
-//I've attached some information about our product. Please don't hesistate to get in touch if you have questions or would like to discuss further.//
+
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">I've attached some information about our product. Please don't hesistate to get in touch if you have questions or would like to discuss further.</p>
+  </div></div>
+
 <<else>>You quickly scan the client's website before deciding what selection of materials to send them. You attach a copy of your product brochure, a couple of case studies that seem relevant and a link to some demo videos on the company YouTube channel.
 
-//"Hi <<print $client_PM_name>>,
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi <<print $client_PM_name>>,
 
-Thanks for your email. I'll be happy to help you with this."
-I've attached some information about our product. Please don't hesistate to get in touch if you have questions or would like to discuss further."//<<endif>>
+Thanks for your email. I'll be happy to help you with this.
+
+I've attached some information about our product. Please don't hesistate to get in touch if you have questions or would like to discuss further.</p>
+</div></div><<endif>>
 
 You sign off and send the email.
 
@@ -72,11 +82,13 @@ It seems <<print $client_PM_name>>'s university has a strong research interest i
 
 Having seen enough for now, you begin to craft an email reply.
 
-//"Hi <<print $client_PM_name>>,
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi <<print $client_PM_name>>,
 
 Thanks for your email. I'll be happy to help you with this.
 
-I see you had some major grants renewed - congratulations! You'll be pleased to know our product has some powerful features to support outcomes reporting to funders. We also have experience working with other similar institutions in your region such as..."// (you list some of their peers)
+I see you had some major grants renewed - congratulations! You'll be pleased to know our product has some powerful features to support outcomes reporting to funders. We also have experience working with other similar institutions in your region such as... (you list some of their peers)</p>
+</div></div>
 
 You briefly consider what else to write.
 
@@ -101,10 +113,12 @@ As usual, it's a long meeting that could've been an email, you think to yourself
 :: Suggest Meeting
 Clearly you need to find out more about what <<print $client_PM_name>> wants <<if visited("Long Reply") is 1>>so you finish by suggesting a meeting to discuss.<<else>>.
 
-//"Hi <<print $client_PM_name>>,
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi <<print $client_PM_name>>,
 
 Thanks for your email. I'll be happy to help you with this."
-May I suggest a quick meeting to discuss?"//<<endif>>
+May I suggest a quick meeting to discuss?</p>
+</div></div><<endif>>
 
 You suggest some possible times, sign off and send the email.
 
@@ -259,7 +273,8 @@ You reply to <<print $client_PM_name>> to thank him for agreeing to meet. You co
 :: Precondition Qualifying Meeting
 Respectful of everyone's time, you decide to include a clear agenda - it's never too soon to start setting and delivering on expectations. You write:
 
-//Hi <<print $client_PM_name>>,
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi <<print $client_PM_name>>,
 
 Thanks for agreeing to meet. I can confirm the date and time you've suggested works well and will send you an invite and Zoom details shortly.
 
@@ -268,7 +283,8 @@ So that I can better help you, I will have some questions for you on our call. I
 Looking forward to meeting you.
 
 Speak soon,
-<<print $player_name>>//
+<<print $player_name>></p>
+</div></div>
 
 You <<linkappend "send the email." t8n>> A little while later, <<print $client_PM_name>> gets in touch to let you know he got the invite and to say it would be good to see a demo of the product on the call.
 
@@ -277,6 +293,6 @@ That's useful to know.
 Soon, [[the day of the meeting approaches|1st Meeting]].<</linkappend>>
 
 :: Don't Precondition Qualifying Meeting
-Not wanting to appear pushy or overly formal at this early stage, you simply sign off with a quick thankyou. It's only the first meeting â€“ better to let things happen organically, you think.
+Not wanting to appear pushy or overly formal at this early stage, you simply sign off with a quick thankyou. It's only the first meeting - better to let things happen organically, you think.
 
 Soon, [[the day of the meeting approaches|1st Meeting]].

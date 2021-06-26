@@ -1,7 +1,8 @@
 :: Invite to 2nd meeting
 You read <<print $client_PM_name>>'s latest email.
 
-<blockquote>Hi,
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hi,
 
 Following our initial investigations, we have determined that 8 suppliers will have the opportunity to give an early 1-hour presentation regarding our new publications management project.
 
@@ -9,8 +10,8 @@ We invite you to come show us your system in two weeks' time.
 
 Regards,
 <<print $client_PM_name>>
-Project Manager
-</blockquote>\
+Project Manager</p>
+</div></div>
 
 How interesting! You begin thinking about how best to prepare.
 

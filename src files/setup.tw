@@ -1,0 +1,108 @@
+:: StoryTitle
+Sales Adventure
+
+:: StoryData
+{
+  "ifid": "CEE7FB8B-7F97-47E1-B73A-FAF87CE66F23"
+}
+
+:: StoryInit
+/% Story Initialise Variables %/\
+<<set $sales_cycle to 0>>\
+<<set $inventory to []>>\
+
+<<set $colleague_name to "Amy">>\
+<<set $boss_name to "Jeorg">>\
+<<set $client_PM_name to "Sean">>\
+
+:: StoryMenu
+[[Check Your Notes|Inventory]]
+[[Check Deal Timer|Sales Cycle Counter]]
+
+:: Sales Cycle Counter
+So far, you have been working this opportunity for <<print $sales_cycle>> days.
+
+<<back>>
+
+:: UserScript[script]
+
+
+:: UserStylesheet[stylesheet]
+html {
+  /* Vertical colour gradient */
+  background-image: linear-gradient(to bottom,  gainsboro, silver);
+  background-image: -webkit-linear-gradient(top,  gainsboro, silver);
+  background-attachment: fixed;
+
+  /* Fallback colour */
+  background-color: silver;
+}
+body {
+  /* Remove default styles */
+  background-color: transparent;
+  margin: 10% 0 0 0;
+  font-size: 100%;
+  /* Used to center the box */
+  text-align: center;
+}
+
+#passages {
+  /* Box background (white with 70% opacity) */
+  background-color: rgba(255, 255, 255, 0.7);
+
+  /* Border */
+  border: 2px solid white;
+
+  /* Rounded corners */
+  border-radius: 1em;
+
+  /* Box width */
+  width: 60%;
+
+  /* Center the box */
+  display: inline-block;
+  min-height: 40%;
+  margin:auto;
+  margin-bottom: 5%;
+  padding: 0px;
+}
+
+.passage {
+  margin: 0px;
+  /* Inner margin within the box */
+  padding: 2em;
+
+  /* Text formatting */
+  color: black;
+  font-size: 100%;
+  text-align:justify;
+}
+
+/* No sidebar */
+#sidebar {
+  display:none;
+}
+
+/* Links */
+a.internalLink, a.externalLink {
+  color: royalblue;
+}
+a.internalLink:hover, a.externalLink:hover {
+  color: deepskyblue;
+  text-decoration: none;
+}
+
+/* Shrink the page when viewed on devices with a low screen width */
+@media screen and (max-width: 960px) {
+  .passage { font-size: 90%;}
+  #passages { width: 70%; }
+}
+@media screen and (max-width: 840px) {
+  .passage {  font-size: 87.5%; }
+  #passages { width: 80%; }
+}
+@media screen and (max-width: 720px) {
+  .passage { font-size: 75%; }
+  #passages { width: 90%; }
+}
+

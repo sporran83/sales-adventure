@@ -1,0 +1,12 @@
+:: Inventory
+So far, here's what you know:
+
+/% if the inventory contains nothing, show "nothing" %/\
+<<if $inventory.length is 0>>\
+    Nothing.
+<<else>>\
+    /% the Array#join() method combines all array elements into a single string, with each element separated by the argument given %/\
+    * <<= $inventory.join('<br>* ')>>.
+<</if>>
+
+<<back>>

@@ -1,0 +1,28 @@
+/* interactives.css */
+
+.passage button {
+	background-color:  #FFA500;
+	color: #fff;
+	padding: 0.5em 0.5em;
+  	border-radius: 1rem;
+  	border: 0px solid #fff;
+  	box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+  	font-size: 80%;
+}
+
+.passage button:hover {
+	filter: brightness(1.1);
+}
+
+.choice-select {
+	line-height: 1.5em;
+	margin-left: 3em;
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.choice-select input {
+	position:  relative;
+	left: -2em;
+	margin-right: -0.9em;
+}

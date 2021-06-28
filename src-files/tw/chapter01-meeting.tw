@@ -5,7 +5,9 @@
 <<set $PointsQualifyTimeline to false>>\
 It's nearly time for your meeting with <<print $client_PM_name>>, <<print $sales_cycle>> days after first receiving their email.
 
-You open Zoom a few minutes before the appointed time. <<print $client_PM_name>> is already in the waiting room. It takes a few seconds to connect to audio and then <<print $client_PM_name>> appears. You notice he has his arms folded. You say hello and <<print $client_PM_name>> nods. "Hello."
+You open Zoom a few minutes before the appointed time. <<print $client_PM_name>> is already in the waiting room. It takes a few seconds to connect to audio and then <<print $client_PM_name>> appears. You notice he has his arms folded. You say hello and <<print $client_PM_name>> nods.
+
+<<sean>>Hello.<</sean>>
 
 What do you do next?
 
@@ -20,7 +22,7 @@ After a couple of minutes it's clear he is impatient to keep moving, so you deci
 :: Client Demands Demo
 You start to ask <<print $client_PM_name>> your first question, but he quickly interrupts you.
 
-"Listen", he says, "it's been <<print $sales_cycle>> days since I first wrote to you. I really just need to see a quick a demo of your product. I thought that was the purpose of this meeting. Can we skip to the demo please?"
+<<sean>>Listen, it's been <<print $sales_cycle>> days since I first wrote to you. I really just need to see a quick a demo of your product. I thought that was the purpose of this meeting. Can we skip to the demo please?<</sean>>
 
 You are a little taken aback, but you quickly compose yourself and realise exactly what you need to do next.
 
@@ -61,10 +63,11 @@ You consider what to do next:
 :: End Qualifying Meeting
 <<if visited("Qualify Budget") is 1>>Before <<print $client_PM_name>> leaves, you quickly ask about next steps.
 
-"It's as I told you". He looks at you.
+<<sean>>It's as I told you<</sean>>
+He looks at you.
 <<else>>In the remaining minutes of the meeting, you ask <<print $client_PM_name>> about next steps.<<endif>>
 
-"Once we've finished our initial investigations, we'll get in touch with the suppliers we're interested in", he says.
+<<sean>>Once we've finished our initial investigations, we'll get in touch with the suppliers we're interested in.<</sean>>
 
 You thank <<print $client_PM_name>> for his time and the meeting ends.
 
@@ -100,9 +103,9 @@ Afterwards, things get busy and you get swept up in other work. A couple of week
 
 You ask <<print $client_PM_name>> to talk you through the project.
 
-He explains the decision has been made by research committee that they need some way of managing their publications better - a new central solution. <<print $client_PM_name>> has been asked to start looking at <<linkappend "possible suppliers." t8n>><<run $inventory.push('They are looking at a broad range of suppliers, including your competitors.')>>
+<<sean>>The decision has been made by research committee that we need some way of managing their publications better - a new central solution. I've been asked to start looking at <<linkappend "possible suppliers." t8n>><<run $inventory.push('They are looking at a broad range of suppliers, including your competitors.')>>
 
-You probe him for more specifics on this. He tells you that they are looking at a broad range of suppliers at this stage and mentions a couple of your competitors. He mentions they are considering a <<linkappend "broad range of options." t8n>><<run $inventory.push('They are considering whether to build their own system.')>> Apparently this also includes talking to the computer science people to see if it's possible to build something in-house.<</linkappend>><</linkappend>>
+We are looking at a broad range of suppliers at this stage, including Symplectic and Converis. As you can imagine, we are considering a <<linkappend "broad range of options." t8n>><<run $inventory.push('They are considering whether to build their own system.')>> For example, we are also talking to the computer science people to see if it's possible to build something in-house.<</linkappend>><</linkappend>><</sean>>
 
 * [[Ask why they need to manage their publications better|Qualify Why 2]]
 * [[Move on to another topic|Ask Qualifying Questions]]
@@ -157,13 +160,23 @@ What do you do?
 
 You ask <<print $client_PM_name>> if there is budget put aside for the work at this stage.
 
-He frowns. "Look mate, I'm just gathering information at this stage. If you had more information on your website I wouldn't need to be having this meeting. It's much too early to be asking about money â€“ if we're interested, we'll talk about it when we're ready."
+He frowns.
 
-You apologise and start to ask another question, but <<print $client_PM_name>> interrupts and says he has everything he needs for now and has another meeting to get to.
+<<sean>>Look mate, I'm just gathering information at this stage. If you had more information on your website I wouldn't need to be having this meeting.
 
-"We'll be in touch", he says.
+It's much too early to be asking about money. If we're interested, we'll talk about it when we're ready.<</sean>>
 
-It seems you have no alternative but to [[wrap things up|End Qualifying Meeting]].
+Oh dear. It looks like you've <<linkappend "offended Sean." t8n>>
+/% render the Rep meter %/\
+<<set $Rep_Sean to $Rep_Sean - 10>>
+<<showmeter 'RepBar_Sean' `$Rep_Sean / $maxRep_Sean`>>
+<div class="guidance">This meter represents a key character's opinion of you. Actions you take can improve or reduce your standing, which will affect what happens. Choose carefully.</div>
+
+You apologise and start to ask another question, but <<print $client_PM_name>> <<linkappend "interrupts..." t8n>> 
+
+<<sean>>I have another meeting to get to, but I've got everything I need for now. We'll be in touch.<</sean>>
+
+It seems you have no alternative but to [[wrap things up|End Qualifying Meeting]].<</linkappend>><</linkappend>>
 
 :: Qualify Why 2
 <<run $inventory.push('They have enormous difficulty reporting their publications to funders and are concerned about how well prepared they are for future major grants rounds.')>>

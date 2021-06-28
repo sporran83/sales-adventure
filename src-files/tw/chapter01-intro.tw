@@ -12,11 +12,11 @@ Welcome, <<print $player_name>>. It's time to [[begin your sales adventure...|In
 :: Intro 2
 It's a busy morning at the office and you're already onto your second coffee. Your colleague <<print $colleague_name>> walks past your desk.
 
-"Hi <<print $player_name>>, are you coming to the meeting?", says <<print $colleague_name>>. "<<print $boss_name>> looks like he is in one of his moods today."
+<<amy>>Hi <<print $player_name>>, are you coming to the meeting? <<print $boss_name>> looks like he is in one of his moods today.<</amy>>
 
 You sigh and deflate a little. The All-Hands meeting! Is it really time for another of those again already? Still, they must know what they're doing, you think.
 
-"Sure, be there in a sec", you tell <<print $colleague_name>>, "save me a seat."
+<<say '$player_name'>>Sure, be there in a sec. Save me a seat.<</say>>
 
 You take a final sip of coffee and check the time. You still have a few minutes before the All-Hands meeting starts, so you quickly [[check the shared sales inbox|Inbound Lead]].
 
@@ -161,7 +161,6 @@ A few days go by and you don't hear anything back. You consider whether to [[sen
 
 :: Qualifying Meeting Confirmed
 <<set $sales_cycle to $sales_cycle + 3>>
-
 <<print $client_PM_name>> has agreed to a 30-minute meeting in three days time. Great! Time to prepare.
 
 What is your overall priority for this meeting?
@@ -203,18 +202,17 @@ While you have several aims and all of them are important, you realise that ulti
 
 You think about what you want to do in the meeting. 30 minutes means you will have time for no more than five things.
 
-<input type="checkbox" id="QualifyIntroCompany" value="Give a background of your company and its values" class="chkGroup"> Give a background of your company and its values
-<input type="checkbox" id="QualifyIntroTeam" value="Explain the roles and responsibilities of people on your team" class="chkGroup"> Explain the roles and responsibilities of people on your team
-<input type="checkbox" id="QualifyIntroProduct" value="Give an overview of your product's features" class="chkGroup"> Give an overview of your product's features
-<input type="checkbox" id="QualifyGiveDemo" value="Give a demo of the product" class="chkGroup"> Give a demo of the product
-<input type="checkbox" id="QualifyRapport" value="Find an opportunity to connect with <<print $client_PM_name>> through conversation about something other than work" class="chkGroup"> Find an opportunity to connect with <<print $client_PM_name>> through conversation about something other than work
-<input type="checkbox" id="QualifyWhy" value="Discuss what drove <<print $client_PM_name>> to reach out to you" class="chkGroup"> Discuss what drove <<print $client_PM_name>> to reach out to you
-<input type="checkbox" id="QualifyTimeline" value="Discuss the client's timeline" class="chkGroup"> Discuss the client's timeline
-<input type="checkbox" id="QualifyBudget" value="Discuss the client's budget" class="chkGroup"> Discuss the client's budget
-<input type="checkbox" id="QualifyWho" value="Find out who is on the project team" class="chkGroup"> Find out who is on the project team
-<input type="checkbox" id="QualifySupplierCriteria" value="Discuss the client's criteria for selecting a new supplier" class="chkGroup"> Discuss the client's criteria for selecting a new supplier
-<<if visited("Follow up Materials") is 1>>
-<input type="checkbox" id="QualifyAnswerQuestions" value="nswer questions about the materials you sent" class="chkGroup"> Answer questions about the materials you sent<<endif>>\
+<div class="choice-select"><input type="checkbox" id="QualifyIntroCompany" value="Give a background of your company and its values" class="chkGroup">Give a background of your company and its values
+<input type="checkbox" id="QualifyIntroTeam" value="Explain the roles and responsibilities of people on your team" class="chkGroup">Explain the roles and responsibilities of people on your team
+<input type="checkbox" id="QualifyIntroProduct" value="Give an overview of your product's features" class="chkGroup">Give an overview of your product's features
+<input type="checkbox" id="QualifyGiveDemo" value="Give a demo of the product" class="chkGroup">Give a demo of the product
+<input type="checkbox" id="QualifyRapport" value="Find an opportunity to connect with <<print $client_PM_name>> through conversation about something other than work" class="chkGroup">Find an opportunity to connect with <<print $client_PM_name>> through conversation about something other than work
+<input type="checkbox" id="QualifyWhy" value="Discuss what drove <<print $client_PM_name>> to reach out to you" class="chkGroup">Discuss what drove <<print $client_PM_name>> to reach out to you
+<input type="checkbox" id="QualifyTimeline" value="Discuss the client's timeline" class="chkGroup">Discuss the client's timeline
+<input type="checkbox" id="QualifyBudget" value="Discuss the client's budget" class="chkGroup">Discuss the client's budget
+<input type="checkbox" id="QualifyWho" value="Find out who is on the project team" class="chkGroup">Find out who is on the project team
+<input type="checkbox" id="QualifySupplierCriteria" value="Discuss the client's criteria for selecting a new supplier" class="chkGroup">Discuss the client's criteria for selecting a new supplier
+<<if visited("Follow up Materials") is 1>><input type="checkbox" id="QualifyAnswerQuestions" value="Answer questions about the materials you sent" class="chkGroup">Answer questions about the materials you sent<<endif>></div>\
 <<script>>
 $(document).one(':passagerender', function (ev) {
 	function selectiveCheck (event) {
@@ -239,7 +237,7 @@ $(document).one(':passagerender', function (ev) {
 });
 <</script>>\
 
-<<if visited("Ask More Time") is 0>>Of course, you could always write back to <<print $client_PM_name>> and [[ask for more time|Ask More Time]].<<endif>>\
+<<if visited("Ask More Time") is 0>>Of course, you could always write back to <<print $client_PM_name>> and [[ask for more time|Ask More Time]].<<endif>>
 
 Once you are sure about how you want to make use of your meeting time, you can click the button to confirm the meeting.
 

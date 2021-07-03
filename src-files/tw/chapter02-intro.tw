@@ -94,7 +94,7 @@ Amy is right, you think. You know you can demo Pure well and you can think on yo
 Instead, you start [[preparing for the presentation|Prepare pre-tender meeting B]].
 
 :: Prepare pre-tender meeting B
-You sit down to prepare the upcoming meeting. You: 
+You sit down to prepare the upcoming meeting. /% You: 
 
 - Get the lastest standard slides from the marketing repository
 - Customise the title slide 
@@ -103,7 +103,7 @@ You sit down to prepare the upcoming meeting. You:
 - It's a 1-hour meeting so you rehearse a 30 min general demo 
 - You design a additional 5 min demo to convey ease of use to academics 
 - You read the objection handling sheet from the Sales Enablement drive
-- You arrange for a product specialist to stand by on slack 
+- You arrange for a product specialist to stand by on slack %/
 
 [NO MORE CONTENT YET]
 
@@ -199,7 +199,7 @@ You do not encourage Sean to invite any other stakeholders, taking his point tha
 
 :: Reply from Sean to email without PS
 <div class="toast toast--blue">
-   <div class="toast__content"><p class="toast__message">"Hi <<print $player_name>>, 
+   <div class="toast__content"><p class="toast__message">Hi <<print $player_name>>, 
 
 Thanks for sharing your experience. We have decided to invite along the head of our grants team, the library director, and a project manager from IT. I will introduce you to them at the meeting. 
 
@@ -226,10 +226,10 @@ Also, good point about the meeting time. I see that 1 hour is no longer enough a
 Best, Sean</p>
 </div></div> 
 
-You set a reminder in your calendard to [[start preparations for the 2-hour meeting a few days before|Prepare pre-tender meeting A]].
+You set a reminder in your calendar to [[start preparations for the 2-hour meeting a few days before|Prepare pre-tender meeting A]].
 
 :: Prepare pre-tender meeting A
-You sit down to prepare the upcoming meeting. You: 
+You sit down to prepare the upcoming meeting. /%You: 
 
 - Get the lastest standard slides from the marketing repository
 - Customise the title slide 
@@ -244,7 +244,7 @@ You sit down to prepare the upcoming meeting. You:
 	- Key features of the grants management module for the grants team 
 	- APC management features for the library 
 	- Ability for local hosting and integration 
-	- Ease of use of academics' main tasks; adding publications, etc. 
+	- Ease of use of academics' main tasks; adding publications, etc. %/
 
 [NO MORE CONTENT YET]
 

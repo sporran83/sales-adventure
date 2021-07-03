@@ -75,7 +75,7 @@ Time to get to the [[All-Hands meeting]]!
 :: Long Reply
 You decide you need time to craft a thoughtful reply, so you spend a while <<linkappend "browsing the client's website." t8n>>
 
-It seems Sean's university has a strong research interest in bioinformatics and recently had some major grants renewed. <<run $inventory.push('They have a strong research interest in bioinformatics and recently had some major grants renewed.')>>
+It seems Sean's university <span class="clue"><<linkreplace 'has a strong research interest in bioinformatics'>>has a strong research interest in bioinformatics<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'a strong research interest in bioinformatics'>><</linkreplace>></span> and <span class="clue"><<linkreplace 'recently had some major grants renewed.'>>recently had some major grants renewed.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'recently had some major grants renewed'>><</linkreplace>></span>
 
 Having seen enough for now, you begin to craft an email reply.
 

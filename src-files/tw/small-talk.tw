@@ -31,7 +31,7 @@ Probably time to [[move on to another topic|Ask Qualifying Questions]].
 It's clear Sean is impatient to keep moving, so you decide to [[get down to business|Start Qualifying Meeting]].
 
 :: Small Talk University
-<<say $player_name>>So how are things going at the university at the moment?<</say>>
+<<say '$player_name'>>So how are things going at the university at the moment?<</say>>
 <<sean>>Fine. We're very busy with this project.<</sean>>
 
 :: Small Talk University Mid

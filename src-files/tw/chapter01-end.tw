@@ -1,22 +1,27 @@
 :: Review Qualifying Meeting
 So far, here's what you know:
-/% if the inventory contains nothing, show "nothing" %/\
-<<if $inventory.length is 0>>\
-    Nothing.
-<<else>>\
-    /% the Array#join() method combines all array elements into a single string, with each element separated by the argument given %/\
-    * <<= $inventory.join('<br>* ')>>.
-<</if>>
 
-Intriguing. You take a moment to <<linkappend "reflect on your meeting." t8n>>
+<strong>Client's background</strong>
+<div class="inventory"><<inventory '$Inv_ClientBackground' '\n <span></span>'>></div>
 
-Ultimately of course, you set out wanting to <<print $QualifyingMeetingPurpose>>. You wonder how well you did.
+<strong>What you've found out about the client's needs</strong>
+<div class="inventory"><<inventory '$Inv_ClientNeeds' '\n <span></span>'>></div>
 
+<strong>Relationships and dynamics</strong>
+<div class="inventory"><<inventory '$Inv_ClientDynamics' '\n <span></span>'>></div>
+
+Intriguing. You take a moment to <<linkappend "reflect on your meeting." t8n>>\
+/% Ultimately of course, you set out wanting to <<print $QualifyingMeetingPurpose>>. You wonder how well you did. %/
+/% Early version of meeting reflection
 <<if $PointsQualifyDemo is false>>You didn't end up giving Sean a demo in this meeting, even though he said he wanted one. You wonder whether that matters, all things considered<<endif>>\
 <<if $PointsQualifyDemo is false>>You still don't know what drove him to reach out to you in the first place. <<endif>>\
 <<if $PointsQualifyTimeline is false >>A pity you didn't find out anything about Sean's timeline. <<endif>>\
 <<if $PointsQualifyWho is false>>It would've been good to ask who is involved in the project besides Sean. <<endif>>\
-<<if $QualifyAnswerQuestions is true>>What about all those detailed questions Sean emailed you about? Oh well.<<endif>>\
+<<if $QualifyAnswerQuestions is true>>What about all those detailed questions Sean emailed you about? Oh well.<<endif>>\ %/
+<<if $Inv_ClientNeeds.count() >5>>You unconvered a great deal of useful information about the client's needs. This will surely be a big help to you in later meetings.
+<<elseif $Inv_ClientNeeds.count() >0>>You discovered a few pieces of useful information about the client's needs. You wonder if you could've found out any more from Sean.
+<<elseif $Inv_ClientNeeds.count() == 0>>After talking to Sean, you realise you still don't actually know anything about what he needs. You wonder what you could have done differently.
+<<endif>>\
 
 With the meeting now finished, you stretch your legs and take a break.
 

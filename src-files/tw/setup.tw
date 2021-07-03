@@ -15,6 +15,15 @@ Sales Adventure
 <<set $boss_name to "Jeorg">>\
 <<set $client_PM_name to "Sean">>\
 
+/% Setup Inventories %/
+<<newinventory '$Inv_ClientBackground'>>
+<<newinventory '$Inv_ClientNeeds'>>
+<<newinventory '$Inv_ClientDynamics'>>
+<<newinventory '$Inv_UseCases'>>
+<<newinventory '$Inv_Experiences'>>
+<<newinventory '$Inv_ProductKnowledge'>>
+
+
 /% Creating Characters %/
 <<character 'amy' 'images/amy.jpeg'>>
 <<character 'sean' 'images/sean.jpeg'>>

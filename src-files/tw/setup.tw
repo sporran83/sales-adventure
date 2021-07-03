@@ -19,15 +19,26 @@ Sales Adventure
 <<character 'amy' 'images/amy.jpeg'>>
 <<character 'sean' 'images/sean.jpeg'>>
 <<character 'jeorg' 'images/jeorg.jpeg'>>
+<<character 'klaus' 'images/test.jpeg'>>
+<<character 'maria' 'images/test.jpeg'>>
 
 /% setting up character Rep meters %/
 <<newmeter 'RepBar_Sean'>>
     <<animation 600ms>>
     <<colors blue blue grey>>
-    <<label 'Sean' 'white' center>>
+    <<label 'Rep with Sean: $Rep_Sean' 'white' center>>
     <<sizing 50% 1.5em>>
 <</newmeter>>
 <<set $Rep_Sean to 50, $maxRep_Sean to 100>>
+
+<<newmeter 'RepBar_Jeorg'>>
+    <<animation 600ms>>
+    <<colors #6B8E23 #6B8E23 grey>>
+    <<label 'Rep with Jeorg: $Rep_Jeorg' 'white' center>>
+    <<sizing 50% 1.5em>>
+<</newmeter>>
+<<set $Rep_Jeorg to 70, $maxRep_Jeorg to 100>>
+
 
 :: StoryMenu
 [[Check Your Notes|Inventory]]

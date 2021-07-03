@@ -1,0 +1,62 @@
+:: Small Talk
+<<set $small_talk_random to either("weather", "sport", "movies", "holiday")>>\
+<<if $small_talk_random is "weather">>\
+You point out that it has been unseasonably <<print either("warm", "cold", "sunny", "rainy", "frosty")>> lately.
+<<elseif $small_talk_random is "sport">>\
+You ask if Sean caught the big game at the weekend. He asks which game, so you tell him.
+
+<<sean>>No, I didn't watch it.<</sean>>
+<<elseif $small_talk_random is "movies">>\
+You ask if Sean has seen the new mystery thriller movie that came out recently.
+
+<<sean>>No, I find I get bored quickly when I have to wait to find out what's going on.<</sean>>
+<<elseif $small_talk_random is "holiday">>\
+You ask Sean if he has any holiday plans coming up.
+
+<<sean>>Not until this project is finished.<</sean>>
+<<endif>>\
+
+There is an awkward pause for a few seconds.
+
+:: Small Talk Mid
+You judge that this is a good moment to make small talk.
+
+<<include "Small Talk">>
+
+Probably time to [[move on to another topic|Ask Qualifying Questions]].
+
+:: Small Talk Early
+<<include "Small Talk">>
+
+It's clear Sean is impatient to keep moving, so you decide to [[get down to business|Start Qualifying Meeting]].
+
+:: Small Talk University
+<<say $player_name>>So how are things going at the university at the moment?<</say>>
+<<sean>>Fine. We're very busy with this project.<</sean>>
+
+:: Small Talk University Mid
+<<include "Small Talk University">>
+
+There doesn't seem to be any more information forthcoming, so you decide to [[move on to another topic|Ask Qualifying Questions]].
+
+:: Small Talk University Early
+<<include "Small Talk University">>
+
+It's clear Sean is impatient to keep moving, so you decide to [[get down to business|Start Qualifying Meeting]].
+
+:: Small Talk Background
+Noticing an interesting <<print either("ornament", "artwork", "item of furniture")>> in Sean's background, you decide to ask about it.
+
+<<sean>>Oh, that? Yes everyone asks about that. I've been thinking about getting rid of it actually.<</sean>>
+
+There is an awkward pause for a few seconds.
+
+:: Small Talk Background Early
+<<include "Small Talk Background">>
+
+It's clear Sean is impatient to keep moving, so you decide to [[get down to business|Start Qualifying Meeting]].
+
+:: Small Talk Background Mid
+<<include "Small Talk Background">>
+
+[[Move on to another topic|Ask Qualifying Questions]]

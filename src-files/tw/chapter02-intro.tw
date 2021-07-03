@@ -1,0 +1,250 @@
+:: Chapter 2 Title
+
+You've reached <<linkappend "Part 2..." t8n>>
+
+Days since you first received the lead: <<print $sales_cycle>>
+
+Your current reputation standing:
+
+<<showmeter 'RepBar_Sean' `$Rep_Sean / $maxRep_Sean`>>
+
+[[Begin Part 2|Chapter 2 Intro]]<</linkappend>>
+
+
+:: Chapter 2 Intro
+
+Still pleased about receiving Sean's email, you notice your colleague Amy walking past.
+
+<<say '$player_name'>>Hey Amy, guess who just got an invitation to a pre-tender meeting?<</say>>
+
+She pauses mid-step and then [[hurries over to your desk, excited|Chapter 2 Intro - B]].
+
+:: Chapter 2 Intro - B
+<<amy>>Nice one! Who is it for?<</amy>>
+
+<<say '$player_name'>>Remember that new client I told you about the other week?<</say>>
+
+<<amy>>Ohh, you mean the one who had his arms crossed the whole time?<</amy>>
+
+You nod, and do an impression of Sean. [[Amy laughs|Chapter 2 Intro - C]].
+
+:: Chapter 2 Intro - C
+<<amy>>That's great. At least you get to talk to them before the tender goes out. I have one at the moment that's already in the silent period and I can only ask questions through their procurement portal.<</amy>>
+
+<<say '$player_name'>>So everyone else bidding on the tender can see what you write too?<</say>>
+
+<<amy>>Exactly. And then the people who answer are just the procurement team so they don't really know anything. Some of the threads on there are hilarious actually.<</amy>>
+
+<<say '$player_name'>>I can imagine.<</say>>
+
+<<amy>>Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>> 
+
+You can sense one of Amy's procurement rants coming on. Entertaining as these can be, you nevertheless decide to [[steer the conversation in a different direction|Chapter 2 Intro - D]].
+
+:: Chapter 2 Intro - D
+<<say '$player_name'>>I need your advice. They haven't given me much information or even told me who is coming to the meeting. I feel like I should ask for more details, but their PM seems pretty impatient and I don't want to annoy him.<</say>>
+
+<<amy>>Haha yeah remember last year when Lindsay kept asking that client like a hundred questions to prepare the perfect demo and then he never heard from them again?<</amy>>
+
+<<say '$player_name'>>Have you heard from Lindsay lately?<</say>>
+
+<<amy>>Last I saw, his LinkedIn still says 'Open to Work'.<</amy>>
+
+<<say '$player_name'>>Yikes. So what's your advice?<</say>>
+
+Amy turns serious for a moment and [[looks you in the eye|Chapter 2 Intro - E]].
+
+:: Chapter 2 Intro - E
+<<amy>>Well honestly <<print $player_name>>, you are one of the best people in the company to demo Pure and you know you can think on your feet.
+
+I haven't spoken to this Sean guy, but all I know is - make the most of talking to them while you still can before the tender comes out, or you'll end up pulling your hair out like me.<</amy>>
+
+<<say '$player_name'>>Thanks Amy.<</say>>
+
+Amy gives you a friendly nod and goes on her way. Turning back to your desk, you allow your mind to [[wander for a few moments|Chapter 2 Intro 2]].
+
+
+:: Chapter 2 Intro 2
+Eventually you drift back to attention as you hear snippets of conversation from across the office.
+
+You smile to yourself - it seems Amy has started up a procurement rant with another colleague.
+
+Time to decide what to do with Sean's email. You <<linkappend "read it again:" t8n>>
+
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hi $player_name,
+
+Following our initial investigations, we have determined that 8 suppliers will have the opportunity to give an early 1-hour presentation regarding our new publications management project.
+
+We invite you to come show us your system in two weeks' time. 
+
+Regards,
+Sean
+Project Manager</p>
+</div></div>
+
+[[Accept the meeting invitation as is|Accept pre-tender meeting cold]]
+[[Send Sean an email with some preparatory questions|Respond to pre-tender meeting invite with questions]]<</linkappend>>
+
+:: Accept pre-tender meeting cold
+Although it would be helpful to have more information, you decide against going back to Sean with more questions at this stage.
+
+Amy is right, you think. You know you can demo Pure well and you can think on your feet. Better to avoid annoying Sean and running the risk that his colleagues will develop a dislike of your company.
+
+Instead, you start [[preparing for the presentation|Prepare pre-tender meeting B]].
+
+:: Prepare pre-tender meeting B
+You sit down to prepare the upcoming meeting. You: 
+
+- Get the lastest standard slides from the marketing repository
+- Customise the title slide 
+- Add a recap of Seans project 
+- Make a list of universities in the country that already use Pure 
+- It's a 1-hour meeting so you rehearse a 30 min general demo 
+- You design a additional 5 min demo to convey ease of use to academics 
+- You read the objection handling sheet from the Sales Enablement drive
+- You arrange for a product specialist to stand by on slack 
+
+[NO MORE CONTENT YET]
+
+:: Respond to pre-tender meeting invite with questions
+Although you're worried about annoying Sean, you know that to prepare properly, you need to know more about the specifics of the 1-hour presentations that you and the 7 other suppliers have been invited to.
+
+Amy is right, you think. Before the tender comes out, you need to find out as much as you can while you still have the chance to talk to the client.
+
+You take the risk and send Sean an email with some preparatory questions. You want to know what he hopes to get out of it, if specific topics should be addressed or avioded, etc. You also want to know who will be there from the university - If IT participates, for example, you want to include some selling points that will appeal to them. 
+
+You write Sean an email asking about the purpose of the meeting and about the participants from the university. You keep it as short as possible: 
+
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi Sean, 
+
+Thanks for your message, looking forward to presenting to you and your colleages. I would like to ask you for some more information about the meeting if you don't mind - so we can be prepare properly and so we can be sure to support the university's agenda. 
+
+Could you give me a bit more detail about the purpose of the meeting, what you expect to come out of it, and how we best support that? Also, it would be super useful to know which stakeholders will attend in addition to yourself and others from the Research Office. For example, will there be people from IT, grants management, the library, compliance, or the tech transfer office? 
+
+Let me know if it is easier to have a quick call. Look forward to hearing from you soon.
+
+Best regards,
+<<print $player_name>></p>
+</div></div>
+
+You [[send the email|Pre-tender reply from Sean]].
+
+:: Pre-tender reply from Sean
+The next day you find this reply from Sean in your inbox: 
+
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hi again <<print $player_name>>,
+
+Fair questions actually, thanks for sending.
+
+It is our intention to have my manager, the Director of the Research Office, in addition to myself and a small number of academic representatives from our four main faculties. Academics will be the largest group of users, and we thought it would make sense to involve someone to represent them early - also given that they will help us score the different bids. 
+
+We do not plan to invite anyone else. They will only ask a lot of questions and take up all our time. Is it normal to ask those other people along, since you ask? Did other universities you worked with do that? 
+
+The general purpose of the meeting is for us to begin to understand the different products in the market and to introduce this project to the academic representatives. It's also an opportunity for you to get to know us. 
+
+I hope this is clear, 
+
+Best from Sean</p>
+</div></div>
+
+Phew, Sean seems grateful for your email. Looks like <<linkappend "the risk paid off...">>
+
+<<set $Rep_Sean to $Rep_Sean + 10>>\
+<<updatemeter 'RepBar_Sean' `$Rep_Sean / $maxRep_Sean`>>\
+You are happy that he accepted your extra questions and that he is open to drawing on your experience. You [[consider how to respond|Pre-tender reply from Sean 2]].<</linkappend>>
+
+<<showmeter 'RepBar_Sean' `$Rep_Sean / $maxRep_Sean`>>
+
+:: Pre-tender reply from Sean 2
+
+On one hand, Sean has a point that inviting more stakeholders likely will eat up too much of the allocated time. It may also complicate the communications, leave a muddy picture of a potential Pure implementation, and prompt difficult quetions from them you may not be able to answer. 
+
+On the other hand, you know that Pure has killer features for three of the stakholders you mentioned to Sean; Pure's Award Management module could wow their Grants Managment team if the happen to open for new software, Pure's ability to record Article Processing Charges is strong, and the library may struggle with the growing challenge of APC management, and IT is always impressed with Pure's ability to integrate with local authentication systems and the option to host locally if need be. 
+
+It's a tough one. Do you encourage Sean to invite more stakeholders?
+
+[[Yes|Invite more stakeholders]]
+[[No|Don't invite more stakeholders]]
+
+:: Invite more stakeholders
+You write a reply to Sean encouraging him to invite along the grants management team, the library, and IT, so you can find out if there is any interest in the killer features you thought of.
+
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi Sean, 
+
+thank for your replies and for asking about our experience. It is in fact our experience that it is best to involve the other stakeholders early in the process. It really does make for a better implementation project and it also makes the following rollout easier and more successful. 
+
+I am not sure if you need to invite along all the stakeholders I mentioned, but we would recommend inviting at least your grants mangement team, the library, and IT. They really are key stakeholders and even though it makes for more quetions now, it will make things easier later. 
+
+I am happy to talk more with you about this if relevant, just let me know if you would like a quick call. And if there is anything else I can do at this point, of course. 
+
+I look forward to the call and to seing you and your colleagues, 
+
+Best regards.
+<<print $player_name>></p>
+</div></div>
+
+
+After drafting the email, you realise that if he invites along the three stakeholder groups you mentioned, one hour will not be enough. You consider whether to add a PS to the email to draw his attention to this fact, or whether to let this be enough and not impose more of your advice on him. 
+
+[[Send the email without the PS|Reply from Sean to email without PS]]
+[[Send the email with the PS|Reply from Sean to email with PS]]
+
+:: Don't invite more stakeholders
+You do not encourage Sean to invite any other stakeholders, taking his point that it might eat up too much of the allocated time, and you write him a quick thank you and then add a reminder to your calendar to [[prepare for the meeting based on what you know now|Prepare pre-tender meeting B]].
+
+
+:: Reply from Sean to email without PS
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">"Hi <<print $player_name>>, 
+
+Thanks for sharing your experience. We have decided to invite along the head of our grants team, the library director, and a project manager from IT. I will introduce you to them at the meeting. 
+
+Please be aware that all 8 invited suppliers will have equal access to these extra attendees. 
+
+Best, Sean</p>
+</div></div>
+
+You are quite happy to see this progress, and you look forward to including demos of the killer features in your presentation for the three additional stakeholders in case they will have interest in them. 
+
+You set a reminder in your calendard to [[start preparations for the 1-hour meeting a few days before|Prepare pre-tender meeting A]].
+
+
+:: Reply from Sean to email with PS
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hi <<print $player_name>>, 
+
+Thanks for sharing your experience. We have decided to invite along the head of our grants team, the library director, and a project manager from IT. I will introduce you to them at the meeting. 
+
+Please be aware that all 8 invited suppliers will have equal access to these extra attendees. 
+
+Also, good point about the meeting time. I see that 1 hour is no longer enough and the invite will be for a 2 hour meeting. You will receive it later this week. 
+
+Best, Sean</p>
+</div></div> 
+
+You set a reminder in your calendard to [[start preparations for the 2-hour meeting a few days before|Prepare pre-tender meeting A]].
+
+:: Prepare pre-tender meeting A
+You sit down to prepare the upcoming meeting. You: 
+
+- Get the lastest standard slides from the marketing repository
+- Customise the title slide 
+- Add a recap of Seans project 
+- Make a list of universities in the country that already use Pure 
+- You read the objection handling sheet from the Sales Enablement drive
+- You arrange for a product specialist to stand by on slack 
+- You rehearse a demo comprising: 
+	- General intro to UI 
+	- Main features of the basic module of interest to all stakeholders 
+	- Reporting and analytical features for Sean's main purposes 
+	- Key features of the grants management module for the grants team 
+	- APC management features for the library 
+	- Ability for local hosting and integration 
+	- Ease of use of academics' main tasks; adding publications, etc. 
+
+[NO MORE CONTENT YET]
+

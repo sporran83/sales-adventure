@@ -1,18 +1,43 @@
+:: Review Qualifying Meeting
+So far, here's what you know:
+/% if the inventory contains nothing, show "nothing" %/\
+<<if $inventory.length is 0>>\
+    Nothing.
+<<else>>\
+    /% the Array#join() method combines all array elements into a single string, with each element separated by the argument given %/\
+    * <<= $inventory.join('<br>* ')>>.
+<</if>>
+
+Intriguing. You take a moment to <<linkappend "reflect on your meeting." t8n>>
+
+Ultimately of course, you set out wanting to <<print $QualifyingMeetingPurpose>>. You wonder how well you did.
+
+<<if $PointsQualifyDemo is false>>You didn't end up giving Sean a demo in this meeting, even though he said he wanted one. You wonder whether that matters, all things considered<<endif>>\
+<<if $PointsQualifyDemo is false>>You still don't know what drove him to reach out to you in the first place. <<endif>>\
+<<if $PointsQualifyTimeline is false >>A pity you didn't find out anything about Sean's timeline. <<endif>>\
+<<if $PointsQualifyWho is false>>It would've been good to ask who is involved in the project besides Sean. <<endif>>\
+<<if $QualifyAnswerQuestions is true>>What about all those detailed questions Sean emailed you about? Oh well.<<endif>>\
+
+With the meeting now finished, you stretch your legs and take a break.
+
+Afterwards, things get busy and you get swept up in other work. A couple of weeks later, Sean [[writes to you again|Invite to 2nd meeting][$sales_cycle to $sales_cycle + 14]].
+<</linkappend>>
+
 :: Invite to 2nd meeting
-You read <<print $client_PM_name>>'s latest email.
+You read Sean's latest email.
 
 <div class="toast toast--blue">
-   <div class="toast__content"><p class="toast__message">Hi,
+   <div class="toast__content"><p class="toast__message">Hi $player_name,
 
 Following our initial investigations, we have determined that 8 suppliers will have the opportunity to give an early 1-hour presentation regarding our new publications management project.
 
 We invite you to come show us your system in two weeks' time. 
 
 Regards,
-<<print $client_PM_name>>
+Sean
 Project Manager</p>
 </div></div>
 
-How interesting! You begin thinking about how best to prepare.
+How interesting! This is quickly becoming one of the more promising projects in your portfolio. You begin thinking about how best to prepare.
 
-[NO MORE CONTENT YET]
+[[Begin Part 2|Chapter 2 Title]]

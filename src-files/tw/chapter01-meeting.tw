@@ -3,24 +3,27 @@
 <<set $PointsQualifyWhy to false>>\
 <<set $PointsQualifyWho to false>>\
 <<set $PointsQualifyTimeline to false>>\
-It's nearly time for your meeting with <<print $client_PM_name>>, <<print $sales_cycle>> days after first receiving their email.
+It's nearly time for your meeting with Sean, <<print $sales_cycle>> days after first receiving their email.
 
-You open Zoom a few minutes before the appointed time. <<print $client_PM_name>> is already in the waiting room. It takes a few seconds to connect to audio and then <<print $client_PM_name>> appears. You notice he has his arms folded. You say hello and <<print $client_PM_name>> nods.
+You open Zoom a few minutes before the appointed time. Sean is already in the waiting room. It takes a few seconds to connect to audio and then Sean appears. You notice he has his arms folded.
+
+You say hello and <<linkappend "Sean nods." t8n>>
 
 <<sean>>Hello.<</sean>>
 
 What do you do next?
 
 [[Dive right into it|Start Qualifying Meeting]]
-[[Make pleasant chit-chat for a few moments|Start Qualifying Meeting Slow]]
+[[Make pleasant chit-chat for a few moments|Start Qualifying Meeting Slow]]<</linkappend>>
 
 :: Start Qualifying Meeting Slow
-You decide to warm up the meeting before diving in by asking <<print $client_PM_name>> about the weather where he is and pointing out something interesting in the background of his video.
-
-After a couple of minutes it's clear he is impatient to keep moving, so you decide to [[get down to business|Start Qualifying Meeting]].
+You decide to warm up things a little with Sean before diving in. 
+* [[Make small talk|Small Talk Early][$Rep_Sean to $Rep_Sean - 2]]
+* [[Ask how things are going at the university|Small Talk University Early]]
+* [[Point out something interesting in the background|Small Talk Background Early][$Rep_Sean to $Rep_Sean - 2]]
 
 :: Client Demands Demo
-You start to ask <<print $client_PM_name>> your first question, but he quickly interrupts you.
+You start to ask Sean your first question, but he quickly interrupts you.
 
 <<sean>>Listen, it's been <<print $sales_cycle>> days since I first wrote to you. I really just need to see a quick a demo of your product. I thought that was the purpose of this meeting. Can we skip to the demo please?<</sean>>
 
@@ -30,20 +33,20 @@ You are a little taken aback, but you quickly compose yourself and realise exact
 * [[Push back|Refuse Demo in Qualifying Meeting]]
 
 :: Even More Demo
-<<print $client_PM_name>> asks you a follow-up question, so you spend a few minutes showing him another section of the product.
-<<if visited("Follow up Materials") >0>>You realise it's the same section he was asking about in his email.<<endif>>
+Sean asks you a follow-up question about grants management, so you spend a few minutes hastily showing him that section of the product. <<if visited("Follow up Materials") >0>>You realise it's the same section he was asking about in his email.<<endif>>
 
-At this point you're now almost out of time, and <<print $client_PM_name>> says he has [[another meeting to go to|End Qualifying Meeting]].
+At this point you're now almost out of time, and Sean says he has [[another meeting to go to|End Qualifying Meeting]].
 
 :: Offer Second Demo
-"I realise we've only scratched the surface here today", you tell <<print $client_PM_name>>. "We can always schedule another session to go more in-depth if you'd like?"
+<<say '$player_name'>>I realise we've only scratched the surface here today. We can always schedule another session to go more in-depth if you'd like?<</say>>
 
-<<print $client_PM_name>> says thanks but tells you he has everything he needs for now.
+<<sean>>Thanks. I think I have everything I need for now.<</sean>>
 
 * [[Move on to another topic|Ask Qualifying Questions]]
 * [[Wrap up the meeting|End Qualifying Meeting]]
 
 :: Ask Qualifying Questions
+<<set $questions_before_demo to $questions_before_demo + 1>>\
 You consider what to do next:
 
 <<if $QualifyIntroCompany is true>>* [[Give a background of your company and its values|Q-Intro Company][$QualifyIntroCompany to false]]<<endif>>\
@@ -56,86 +59,69 @@ You consider what to do next:
 <<if $QualifyWho is true>>* [[Find out who is on the project team|Qualify Who][$QualifyWho to false]]<<endif>>\
 <<if $QualifySupplierCriteria is true>>* [[Discuss the client's criteria for selecting a new supplier|Qualify Supplier][$QualifySupplierCriteria to false]]<<endif>>\
 <<if $QualifyAnswerQuestions is true>>* [[Answer questions about the materials you sent|Answer Email Questions][$QualifyAnswerQuestions to false]]<<endif>>\
-<<if $QualifyGiveDemo is true>>* [[Give a demo of the product|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
+<<if $QualifyGiveDemo is true>>* [[Demo the product|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
 <<if visited("Ask Qualifying Questions") > 1 >>* [[Wrap up the meeting|End Qualifying Meeting]]<<endif>>\
 
-
 :: End Qualifying Meeting
-<<if visited("Qualify Budget") is 1>>Before <<print $client_PM_name>> leaves, you quickly ask about next steps.
+<<if visited("Qualify Budget") is 1>>Before Sean leaves, you quickly ask about next steps.
 
 <<sean>>It's as I told you<</sean>>
 He looks at you.
-<<else>>In the remaining minutes of the meeting, you ask <<print $client_PM_name>> about next steps.<<endif>>
+<<else>>In the remaining minutes of the meeting, you ask Sean about next steps.<<endif>>
+<<if $QualifyGiveDemo is true>><<sean>>Next steps?! Mate, I only wanted one thing from this meeting and that was to see a demo. I told you that clearly, but instead you went on a complete tangent.<</sean>>
+Stunned, you realise he's right.
+
+<<say '$player_name'>>I'm very sorry about that. Can I give you a demo right now?<</say>>
+<<sean>>Nah, forget it. I've seen enough for today.<</sean>>
+You stare at each other in a frozen silence that feels like it lasts hours but is really only a few seconds. You go to speak, but Sean pre-empts your next question.
+<<endif>>\
 
 <<sean>>Once we've finished our initial investigations, we'll get in touch with the suppliers we're interested in.<</sean>>
 
-You thank <<print $client_PM_name>> for his time and the meeting ends.
+You thank Sean for his time and the meeting ends.
 
-Well, that was interesting. Time to <<linkappend "take a look at your notes." t8n>>
-
-So far, here's what you know:
-/% if the inventory contains nothing, show "nothing" %/\
-<<if $inventory.length is 0>>\
-    Nothing.
-<<else>>\
-    /% the Array#join() method combines all array elements into a single string, with each element separated by the argument given %/\
-    * <<= $inventory.join('<br>* ')>>.
-<</if>>
-
-Intriguing. You take a moment to <<linkappend "reflect on your meeting." t8n>>
-
-Ultimately of course, you set out wanting to <<print $QualifyingMeetingPurpose>>. You wonder how well you did.
-
-<<if $PointsQualifyDemo is false>>You didn't end up giving <<print $client_PM_name>> a demo in this meeting, even though he said he wanted one. You wonder whether that matters, all things considered<<endif>>\
-<<if $PointsQualifyDemo is false>>You still don't know what drove him to reach out to you in the first place. <<endif>>\
-<<if $PointsQualifyTimeline is false >>A pity you didn't find out anything about <<print $client_PM_name>>'s timeline. <<endif>>\
-<<if $PointsQualifyWho is false>>It would've been good to ask who is involved in the project besides <<print $client_PM_name>>. <<endif>>\
-<<if $QualifyAnswerQuestions is true>>What about all those detailed questions <<print $client_PM_name>> emailed you about? Oh well.<<endif>>\
-
-With the meeting now finished, you stretch your legs and take a break.
-
-Afterwards, things get busy and you get swept up in other work. A couple of weeks later, <<print $client_PM_name>> [[writes to you again|Invite to 2nd meeting][$sales_cycle to $sales_cycle + 14]].
-<</linkappend>><</linkappend>>
+Well, that was interesting. Time to [[take a look at your notes|Review Qualifying Meeting]].
 
 :: Qualify Why
 <<run $inventory.push('Research Committee needs a new central solution for managing their publications.')>>\
 <<set $PointsQualifyWhy to true>>\
-
-You ask <<print $client_PM_name>> to talk you through the project.
+You ask Sean to talk you through the project.
 
 <<sean>>The decision has been made by research committee that we need some way of managing their publications better - a new central solution. I've been asked to start looking at <<linkappend "possible suppliers." t8n>><<run $inventory.push('They are looking at a broad range of suppliers, including your competitors.')>>
 
 We are looking at a broad range of suppliers at this stage, including Symplectic and Converis. As you can imagine, we are considering a <<linkappend "broad range of options." t8n>><<run $inventory.push('They are considering whether to build their own system.')>> For example, we are also talking to the computer science people to see if it's possible to build something in-house.<</linkappend>><</linkappend>><</sean>>
-
 * [[Ask why they need to manage their publications better|Qualify Why 2]]
 * [[Move on to another topic|Ask Qualifying Questions]]
-
 
 :: Give Demo in Qualifying Meeting
 <<set $PointsQualifyDemo to true>>\
 <<set $QualifyGiveDemo to false>>\
-"Ok, let me give you a demo", you say, "just give a moment to open the tab and share my screen."
+<<say '$player_name'>>Ok, let me give you a demo. Just give a moment to open the tab and share my screen.<</say>>
+<<if $questions_before_demo == 2>><<sean>>Great, I was hoping you would come to that soon.<</sean>>
+<<elseif $questions_before_demo == 3>><<sean>>Good. I was beginning to think you'd forgotten.<</sean>>
+<<elseif $questions_before_demo > 3>><<sean>>Finally.<</sean>><<endif>>\
 
-You show <<print $client_PM_name>> around the user interface and give a general overview, spending a few moments to explain each of the main sections.
+You show Sean around the user interface and give a general overview, spending a few moments to explain each of the main sections.
 
-Realising you are quickly chewing through your meeting time, you:
-
+You realise you are quickly chewing through your meeting time.
 * [[Ask if he would like to see something specific|Even More Demo]]
 * [[Offer a more in-depth demo at another time|Offer Second Demo]]
 * [[Return to your original questions|Ask Qualifying Questions]]
 
 :: Refuse Demo in Qualifying Meeting
-Taking a firm but respectful tone, you tell <<print $client_PM_name>> that while you can appreciate he is keen to see a demo, Pure is a large and complex system and it would be a waste of his time and yours to demo aimlessly without first understanding more about the specifics of his situation.
+Taking a firm but respectful tone, you tell Sean that while you can appreciate he is keen to see a demo, Pure is a large and complex system and it would be a waste of his time and yours to demo aimlessly without first understanding more about the specifics of his situation.
 
-You brace yourself for a tense moment, but <<print $client_PM_name>> agrees. Unfolding his arms, he [[offers to tell you about the project|Qualify Why][$QualifyWhy to false]].
+You brace yourself for a tense moment, but Sean agrees. Unfolding his arms, he [[offers to tell you about the project|Qualify Why][$QualifyWhy to false]].
 
 :: Start Qualifying Meeting
-<<set $QualifyGiveDemo to true>>\
-<<if visited("Start Qualifying Meeting Slow") is 0>>Noticing <<print $client_PM_name>> looks impatient, you decide to dive right in.
+/% <<set $QualifyGiveDemo to true>>\ %/
+<<set $questions_before_demo to -1>>\
+<<if visited("Start Qualifying Meeting Slow") is 0>>Noticing Sean looks impatient, you decide to dive right in.
 <<endif>>\
-"Thanks for coming", you say, "shall we start?"
 
-<<if $PreconditionQualifyingMeeting is false>><<print $client_PM_name>> nods, his arms still folded. He waits for you to continue.
+<<say '$player_name'>>Thanks for coming, shall we start?<</say>>
+
+<<if $PreconditionQualifyingMeeting is false>>Sean nods, his arms still folded. He waits for you to continue.
 
 What do you do?
 
@@ -149,16 +135,16 @@ What do you do?
 <<if $QualifyWho is true>>* [[Find out who is on the project team|Client Demands Demo]]<<endif>>\
 <<if $QualifySupplierCriteria is true>>* [[Discuss the client's criteria for selecting a new supplier|Client Demands Demo]]<<endif>>\
 <<if $QualifyAnswerQuestions is true>>* [[Answer questions about the materials you sent|Client Demands Demo]]<<endif>>\
-<<if $QualifyGiveDemo is true>>* [[Give a demo of the product|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
+<<if $QualifyGiveDemo is true>>* [[Demo the product|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
 
-<<elseif $PreconditionQualifyingMeeting is true>>"Sure", says <<print $client_PM_name>>. "I got your email. Where would you like to start?"
+<<elseif $PreconditionQualifyingMeeting is true>><<sean>>Sure, I got your email. Where would you like to start?<</sean>>
 
 <<include "Ask Qualifying Questions">><<endif>>
 
 :: Qualify Budget
-<<run $inventory.push('<<print $client_PM_name>> did not like being asked about the budget in your first meeting.')>>\
+<<run $inventory.push('Sean did not like being asked about the budget in your first meeting.')>>\
 
-You ask <<print $client_PM_name>> if there is budget put aside for the work at this stage.
+You ask Sean if there is budget put aside for the work at this stage.
 
 He frowns.
 
@@ -170,20 +156,18 @@ Oh dear. It looks like you've <<linkappend "offended Sean." t8n>>
 /% render the Rep meter %/\
 <<set $Rep_Sean to $Rep_Sean - 10>>
 <<showmeter 'RepBar_Sean' `$Rep_Sean / $maxRep_Sean`>>
-<div class="guidance">This meter represents a key character's opinion of you. Actions you take can improve or reduce your standing, which will affect what happens. Choose carefully.</div>
 
-You apologise and start to ask another question, but <<print $client_PM_name>> <<linkappend "interrupts..." t8n>> 
+You apologise and start to ask another question, but Sean <<linkappend "interrupts..." t8n>> 
 
 <<sean>>I have another meeting to get to, but I've got everything I need for now. We'll be in touch.<</sean>>
 
 It seems you have no alternative but to [[wrap things up|End Qualifying Meeting]].<</linkappend>><</linkappend>>
 
 :: Qualify Why 2
-<<run $inventory.push('They have enormous difficulty reporting their publications to funders and are concerned about how well prepared they are for future major grants rounds.')>>
-
+<<run $inventory.push('They have enormous difficulty reporting their publications to funders and are concerned about how well prepared they are for future major grants rounds.')>>\
 You decide to probe further and ask if there are specific issues about the way they manage publications at the moment.
 
-<<print $client_PM_name>> explains that at the moment they have enormous difficulty reporting their publications to funders. They have some concerns about how well prepared they are for future major grants rounds.
+Sean explains that at the moment they have enormous difficulty reporting their publications to funders. They have some concerns about how well prepared they are for future major grants rounds.
 
 You make a note of this, wondering if there are any <<linkappend "more use cases to discover." t8n>><<run $inventory.push('They are thinking of starting a new biolab. Since they are seeking government funding for this, they will also need analysis on what work they have done in this area.')>> When you ask, it turns out they are also thinking of starting a new biolab. Since they are seeking government funding for this, they will also need analysis on what work they have done in this area.<</linkappend>>
 
@@ -192,12 +176,11 @@ You make a note of this, wondering if there are any <<linkappend "more use cases
 :: Qualify Who
 <<set $PointsQualifyWho to true>>\
 <<run $inventory.push('The project is being driven by the Director of the Research Office.')>>\
+You ask Sean who is involved in the work from his side.
 
-You ask <<print $client_PM_name>> who is involved in the work from his side.
+He explains that the project is being driven by the Director of the Research Office, who is Sean's boss and is also part of the <<linkappend "research committee." t8n>><<run $inventory.push('A Project Board has recently been set up to report to research committee.')>>
 
-He explains that the project is being driven by the Director of the Research Office, who is <<print $client_PM_name>>'s boss and is also part of the <<linkappend "research committee." t8n>><<run $inventory.push('A Project Board has recently been set up to report to research committee.')>>
-
-You ask if other members of the research committee are involved and <<print $client_PM_name>> tells you that in fact a Project Board has recently been set up <<linkappend "to report to research committee." t8n>><<run $inventory.push('The Project Board also comprises people from Library, ICT and the Pro Vice-Chancellors office. <<print $client_PM_name>> is the project manager.')>> The Project Board also comprises people from Library, ICT and the Pro Vice-Chancellor's office. <<print $client_PM_name>> is the project manager.<</linkappend>><</linkappend>>
+You ask if other members of the research committee are involved and Sean tells you that in fact a Project Board has recently been set up <<linkappend "to report to research committee." t8n>><<run $inventory.push('The Project Board also comprises people from Library, ICT and the Pro Vice-Chancellors office. Sean is the project manager.')>> The Project Board also comprises people from Library, ICT and the Pro Vice-Chancellor's office. Sean is the project manager.<</linkappend>><</linkappend>>
 
 [[Move on to another topic|Ask Qualifying Questions]]
 
@@ -205,7 +188,7 @@ You ask if other members of the research committee are involved and <<print $cli
 <<set $PointsQualifyTimeline to true>>\
 <<run $inventory.push('The new system will need to be live in time for the next major grants round in 18 months time.')>>\
 
-You ask <<print $client_PM_name>> if he has a 'go-live' date in mind.
+You ask Sean if he has a 'go-live' date in mind.
 
 He explains that they are at the early stages so it is too soon to have a firm date in mind, but a new system will need to be live in time for the next major grant round in 18 months time.
 
@@ -213,50 +196,45 @@ He explains that they are at the early stages so it is too soon to have a firm d
 
 :: Qualify Supplier
 <<run $inventory.push('There is a more rigorous procurement process in place for new projects.')>>\
+You ask Sean what sort of criteria they use to select suppliers.
 
-You ask <<print $client_PM_name>> what sort of criteria they use to select suppliers.
+He says the usual things: ability to meet requirements, cost, support. He says that their new procurement process is much more rigorous <<linkappend "than it used to be." t8n>><<run $inventory.push('There have been issues in the past with suppliers failing to deliver.')>>
 
-He says the usual things â€“ ability to meet requirements, cost, support. He says that their new procurement process is much more rigorous <<linkappend "than it used to be." t8n>><<run $inventory.push('There have been issues in the past with suppliers failing to deliver.')>>
-
-When you ask <<print $client_PM_name>> to elaborate, he explains that he is fairly new so he doesn't know all the details, but apparently there have been issues in the past with suppliers failing to deliver and this means there is extra scrutiny on new projects.<</linkappend>>
+When you ask Sean to elaborate, he explains that he is fairly new so he doesn't know all the details, but apparently there have been issues in the past with suppliers failing to deliver and this means there is now extra scrutiny on new projects.<</linkappend>>
 
 * [[Move on to another topic|Ask Qualifying Questions]]
 
 :: Answer Email Questions
-You offer to answer the list of questions <<print $client_PM_name>> sent by email.
+You offer to answer the list of questions Sean sent by email.
 
 You go through the answers one by one. He seems happy with your explanations and you see him making detailed notes.
 
 [[Move on to another topic|Ask Qualifying Questions][$QualifyAnswerQuestions to false]]
 
 :: Q-Intro Company
-You spend several minutes taking <<print $client_PM_name>> through a series of slides about your company's background and mission, including recent efforts to improve scholarly publishing capability in developing nations.
+You spend several minutes taking Sean through a series of slides about your company's background and mission, including recent efforts to improve scholarly publishing capability in developing nations.
 
-After you've finished, you ask <<print $client_PM_name>> if he has any questions. He doesn't.
+After you've finished, you ask Sean if he has any questions. He doesn't.
 
 [[Move on to another topic|Ask Qualifying Questions]]
 
 
 :: Q-Intro Team
-You spend a moment or two talking to a slide showing your company's organisational chart, before showing <<print $client_PM_name>> a fun slide that has all your team members on it, their backgrounds and their favourite animals. You always have fun showing people this slide.
+You spend a moment or two talking to a slide showing your company's organisational chart, before showing Sean a fun slide that has all your team members on it, their backgrounds and their favourite animals. You always have fun showing people this slide.
 
-You consider asking <<print $client_PM_name>> if he has a favourite animal, but then decide against it.
+You consider asking Sean if he has a favourite animal, but then decide against it.
 
 [[Move on to another topic|Ask Qualifying Questions]]
 
 :: Q-Intro Product
 You bring up the standard info deck for your product and spend several minutes explaining each of the key features. It always takes a little while, but there's so much important information to cover.
 
-You notice <<print $client_PM_name>> taking notes.
+After a while, you notice Sean's attention begin to wander.
 
 [[Move on to another topic|Ask Qualifying Questions]]
 
 :: Qualify Rapport
-You decide this is an ideal moment to try to get to know <<print $client_PM_name>> a little better.
-
-What do you say?
-* [Option 1]
-* [Option 2]
-* [Option 3]
-
-[[Move on to another topic|Ask Qualifying Questions]]
+You decide this is an ideal moment to try to get to know Sean a little better.
+* [[Make small talk|Small Talk Mid][$Rep_Sean to $Rep_Sean - 2]]
+* [[Ask how things are going at the university|Small Talk University Mid]]
+* [[Point out something interesting in the background|Small Talk Background Mid][$Rep_Sean to $Rep_Sean - 2]]

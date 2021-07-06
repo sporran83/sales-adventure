@@ -1,0 +1,62 @@
+:: Pre-Tender Meeting Prep Dashboard
+
+What do you want to do now?
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Prepare Pre-Tender Presentation
+What do you want to do?
+
+[[Draft an agenda]]
+[[Prepare slide deck]]
+[[Rehearse live demo script]]
+
+Or you could...
+
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Desktop Research
+What are you looking for?
+
+[[Browse the company's internal marketing repository]]
+[[Look for internal product information]]
+[[Browse the client's website]]
+[[Explore the web]]
+
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Talk to colleagues
+Who do you want to talk to?
+
+[[Amy|Talk to Amy]]
+[[Maria|Talk to Maria]]
+[[Jeorg|Talk to Jeorg]]
+[[Klaus|Talk to Klaus]]
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Contact the client]]
+
+:: Contact the client
+Who do you want to contact?
+
+[[Contact Sean|Contact Sean]]
+[If you have met other stakeholders they will show here]
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]

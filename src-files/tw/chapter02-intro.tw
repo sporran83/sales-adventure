@@ -39,7 +39,20 @@ You nod, and do an impression of Sean. [[Amy laughs|Chapter 2 Intro - C]].
 
 <<amy>>Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>> 
 
-You can sense one of Amy's procurement rants coming on. Entertaining as these can be, you nevertheless decide to [[steer the conversation in a different direction|Chapter 2 Intro - D]].
+You can sense one of Amy's procurement rants coming on. Entertaining as these can be, you nevertheless decide to [[steer the conversation in a different direction|Pre-Tender Meeting Prep Dashboard]].
+
+:: Chapter 2 Early Prepare Meeting
+You start preparing an early outline for what you will present in the meeting, based on what you know.
+
+
+
+
+<div class="inventory2"><<linkedinventory 'Use this' '$Inv_ClientNeeds' '$Inv_PreTenderPrep'>></div>
+
+What you have to show
+<<linkreplace 'Show Prep'>>Show Prep. <div class="inventory"><<inventory '$Inv_PreTenderPrep' '\n <span></span>'>></div><</linkreplace>>
+
+
 
 :: Chapter 2 Intro - D
 <<say '$player_name'>>I need your advice. They haven't given me much information or even told me who is coming to the meeting. I feel like I should ask for more details, but their PM seems pretty impatient and I don't want to annoy him.<</say>>

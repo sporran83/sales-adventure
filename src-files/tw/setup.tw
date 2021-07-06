@@ -22,6 +22,7 @@ Sales Adventure
 <<newinventory '$Inv_UseCases'>>
 <<newinventory '$Inv_Experiences'>>
 <<newinventory '$Inv_ProductKnowledge'>>
+<<newinventory '$Inv_PreTenderPrep'>>
 
 
 /% Creating Characters %/

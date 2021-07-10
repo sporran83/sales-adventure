@@ -23,6 +23,7 @@ Sales Adventure
 <<newinventory '$Inv_Experiences'>>
 <<newinventory '$Inv_ProductKnowledge'>>
 <<newinventory '$Inv_PreTenderPrep'>>
+<<newinventory '$Inv_Test' 'a pair of shoes' 'the shirt on your back'>>
 
 
 /% Creating Characters %/
@@ -49,6 +50,15 @@ Sales Adventure
 <</newmeter>>
 <<set $Rep_Jeorg to 70, $maxRep_Jeorg to 100>>
 
+/% jQuery setup %/
+
+<<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous">><</script>>
+
+<<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">><</script>>
+
 
 :: StoryMenu
 [[Check Your Notes|Inventory]]
@@ -60,6 +70,29 @@ So far, you have been working this opportunity for <<print $sales_cycle>> days.
 <<back>>
 
 :: UserScript[script]
+
+/*! jQuery v3.6.0 | (c) OpenJS Foundation and other contributors | jquery.org/license */
+
+/* (function ($) {
+  $(document.createElement('script'))
+    .attr({
+      id   : 'script-jquery-core',
+      type : 'text/javascript',
+      src  : 'https://code.jquery.com/jquery-3.6.0.min.js'
+    })
+    .appendTo(document.head);
+})(jQuery);
+
+(function ($) {
+  $(document.createElement('script'))
+    .attr({
+      id   : 'script-jquery-ui',
+      type : 'text/javascript',
+      src  : 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'
+    })
+    .appendTo(document.head);
+})(jQuery); */
+
 
 
 :: UserStylesheet[stylesheet]

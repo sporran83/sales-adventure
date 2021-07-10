@@ -1,6 +1,8 @@
 :: Start
 Before we begin...
 
+[[Dev Shortcut|Draft Pre-Tender Meeting Agenda]]
+
 ''What is your name?''
 <<textbox "$player_name" "" "Intro" autofocus>>
 

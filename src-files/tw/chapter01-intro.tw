@@ -1,7 +1,7 @@
 :: Start
 Before we begin...
 
-[[Dev Shortcut|Draft Pre-Tender Meeting Agenda]]
+[[Draft Pre-Tender Meeting Agenda]]
 
 ''What is your name?''
 <<textbox "$player_name" "" "Intro" autofocus>>
@@ -22,18 +22,37 @@ You sigh and deflate a little. The All-Hands meeting! Is it really time for anot
 You take a final sip of coffee and check the time. You still have a few minutes before the All-Hands meeting starts, so you quickly [[check the shared sales inbox|Inbound Lead]].
 
 :: Inbound Lead
-You notice an unread email in the inbox - a new lead!
+You notice an unread email in the inbox:
 
 <div class="toast toast--blue">
-   <div class="toast__content"><p class="toast__message">Hello. We've heard about your product and we would like some information.
+   <div class="toast__content"><p class="toast__message">Hello. We've <span class="clue"><<linkreplace 'heard about your product and we would like some information.'>>heard about your product and we would like some information.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'Sean has heard about your product and wants more information'>><</linkreplace>></span>
 
-    Regards,
+   Regards,
 Sean</p>
   </div></div>
 
-You briefly consider what to do.
+Looks like you've got [[a new lead|Inbound Lead 2]]!
+
+:: Inbound Lead 2
+<<if $Inv_ClientBackground.has('Sean has heard about your product and wants more information')>>\
+You start keeping notes of relevant information, realising it will be handy to refer to as you go along.	
+
+<strong>Notes</strong>
+<div class="inventory"><<inventory '$Inv_ClientBackground' '\n <span></span>'>></div>
+
+You briefly consider what to do with Sean's email.
 * [[Write a quick reply now and get to the meeting|Short Reply]]
-* [[Take time to write a detailed reply|Long Reply]]
+* [[Take time to write a detailed reply|Long Reply]]	
+<<else>>	
+	Realising you haven't yet started keeping notes, you suddenly feel an overwhelming urge to click the coloured text in Sean's email before [[going any further|Inbound Lead 2]].
+
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hello. We've <span class="clue"><<linkreplace 'heard about your product and we would like some information.'>>heard about your product and we would like some information.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'Sean has heard about your product and wants more information'>><</linkreplace>></span>
+
+   Regards,
+Sean</p>
+  </div></div> 
+<</if>>
 
 
 :: Short Reply
@@ -185,7 +204,7 @@ A few days go by and you don't hear anything back. You consider whether to [[sen
 <<set $sales_cycle to $sales_cycle + 3>>\
 Sean agrees to a 30-minute meeting in three days time. Great! Time to prepare.
 
-What is your overall priority for this meeting?
+What is your <strong>overall</strong> priority for this meeting?
 * [[Build good rapport|Prepare 1st Meeting][$QualifyingMeetingPurpose to "build good rapport"]]
 * [[Gather information|Prepare 1st Meeting][$QualifyingMeetingPurpose to "gather information"]]
 * [[Make a good impression of you, your company and your product|Prepare 1st Meeting][$QualifyingMeetingPurpose to "make a good impression of you, your company and your product"]]
@@ -220,8 +239,8 @@ You think about what you want to do in the meeting. 30 minutes means you will ha
 <input type="checkbox" id="QualifyIntroTeam" value="Explain the roles and responsibilities of people on your team" class="chkGroup">Explain the roles and responsibilities of people on your team
 <input type="checkbox" id="QualifyTimeline" value="Discuss the client's timeline" class="chkGroup">Discuss the client's timeline
 <input type="checkbox" id="QualifySupplierCriteria" value="Discuss the client's criteria for selecting a new supplier" class="chkGroup">Discuss the client's criteria for selecting a new supplier
-<input type="checkbox" id="QualifyIntroProduct" value="Give an overview of your product's features" class="chkGroup">Give an overview of your product's features
-<input type="checkbox" id="QualifyGiveDemo" value="Give a demo of the product" class="chkGroup">Give a demo of the product
+<input type="checkbox" id="QualifyIntroProduct" value="Present some overview slides of your product's features" class="chkGroup">Present some overview slides of your product's features
+<input type="checkbox" id="QualifyGiveDemo" value="Give a live demo of the product" class="chkGroup">Give a live demo of the product
 <input type="checkbox" id="QualifyWhy" value="Discuss what drove Sean to reach out to you" class="chkGroup">Discuss what drove Sean to reach out to you
 <input type="checkbox" id="QualifyBudget" value="Discuss the client's budget" class="chkGroup">Discuss the client's budget
 <input type="checkbox" id="QualifyWho" value="Find out who is on the project team" class="chkGroup">Find out who is on the project team

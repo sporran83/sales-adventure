@@ -1,133 +1,95 @@
-:: Pre-Tender Meeting Prep Dashboard
-
-What do you want to do now?
-
-[[Prepare the presentation|Prepare Pre-Tender Presentation]]
-[[Do more research|Desktop Research]]
-[[Talk to colleagues]]
-[[Contact the client]]
-
-:: Prepare Pre-Tender Presentation
-What do you want to do?
-
-[[Draft an agenda|Draft Pre-Tender Meeting Agenda]]
-[[Prepare slide deck]]
-[[Rehearse live demo script]]
-
-Or you could...
-
-[[Do more research|Desktop Research]]
-[[Talk to colleagues]]
-[[Contact the client]]
-
-:: Draft Pre-Tender Meeting Agenda
-
-/%
-<ul id="example1" class="list-group">
-    <li class="list-group-item" data-id="1">Item 1</li>
-    <li class="list-group-item" data-id="2">Item 2</li>
-    <li class="list-group-item" data-id="3">Item 3</li>
-    <li class="list-group-item" data-id="4">Item 4</li>
-    <li class="list-group-item" data-id="5">Item 5</li>
-  </ul>
-
-<<done>>
-<<script>>
-    State.active.variables.sorted = Sortable.create(document.getElementById("example1"), {
-        animation: 150,
-        ghostClass: 'blue-background-class'
-        // handle: '.handle', // handle's class 
-    });
-    
-<</script>>
-<</done>>
-
-Current Order: <span id="blah"><<print $order>></span>
-
-<<button "Update Order">>
-<<script>>State.active.variables.order = State.active.variables.sorted.toArray();<</script>>
-<<set $order to State.active.variables.order>>
-<<replace "#blah">><<print $order>><</replace>>
-<</button>> %/
-
-/% Create a sortable list dynamically populated with inventory and save the order as an array %/
-
-What you can include in the meeting:
-<<print "<ul id=\"exampleLeft\" class=\"list-group\">" + State.variables.Inv_ClientNeeds.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
-
-Your meeting agenda:
-<ul id="exampleRight" class="list-group">
-    <li class="list-group-item nope" data-id="Introductions">Introductions</li>
-  </ul>
-
-<<done>>
-<<script>>
-    Sortable.create(document.getElementById("exampleLeft"), {
-    group: {
-        name: 'shared',
-    },
-    animation: 150,
-    sort: false
-});
-
-    State.active.variables.sorted2 = Sortable.create(document.getElementById("exampleRight"), {
-    group: {
-        name: 'shared',
-        filter: '.nope',
-    },
-    animation: 150
-});
-<</script>>
-<</done>>
-
-<<button "Export Agenda">>
-/%<<set $samplesort to State.variables.initialOrder>>%/
-<<script>>State.active.variables.order2 = State.active.variables.sorted2.toArray();<</script>>
-<<set $order2 to State.active.variables.order2>>
-<<replace "#blah2">><<print $order2>><</replace>>
-<</button>>
-
-Current Agenda: <span id="blah2"><<print $order2>></span>
+:: PTMP Dashboard
+You consider what to do next.
 
 
-:: Desktop Research
-What are you looking for?
 
-[[Browse the company's internal marketing repository]]
-[[Look for internal product information]]
-[[Browse the client's website]]
-[[Explore the web]]
+:: PTMP Draft Agenda
 
 
-Or you could...
 
-[[Prepare the presentation|Prepare Pre-Tender Presentation]]
-[[Talk to colleagues]]
-[[Contact the client]]
+:: PTMP Amy
+You wander over to Amy's desk. She is on the phone.
 
-:: Talk to colleagues
-Who do you want to talk to?
+<<amy>>(on the phone) ...Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>>
 
-[[Amy|Talk to Amy]]
-[[Maria|Talk to Maria]]
-[[Jeorg|Talk to Jeorg]]
-[[Klaus|Talk to Klaus]]
+You smile and wait for Amy to finish her procurement rant. Entertaining as these can be, today you need to steer the conversation in a different direction, so you quickly jump in once she hangs up.
 
-Or you could...
+<<say '$player_name'>>So that client we talked about? I need your advice. They haven't given me much information or even told me who is coming to the meeting. I feel like I should ask for more details, but their PM seems pretty impatient and I don't want to annoy him.<</say>>
 
-[[Prepare the presentation|Prepare Pre-Tender Presentation]]
-[[Do more research|Desktop Research]]
-[[Contact the client]]
+<<amy>>Haha yeah remember last year when Lindsay kept asking that client like a hundred questions to prepare the perfect demo and then he never heard from them again?<</amy>>
 
-:: Contact the client
-Who do you want to contact?
+<<say '$player_name'>>Have you heard from Lindsay lately?<</say>>
 
-[[Contact Sean|Contact Sean]]
-[If you have met other stakeholders they will show here]
+<<amy>>Last I saw, his LinkedIn still says 'Open to Work'.<</amy>>
 
-Or you could...
+<<say '$player_name'>>Yikes. So what's your advice?<</say>>
 
-[[Prepare the presentation|Prepare Pre-Tender Presentation]]
-[[Do more research|Desktop Research]]
-[[Talk to colleagues]]
+Amy turns serious for a moment and looks you in the eye.
 
+<<amy>>Well I haven't spoken to this Sean guy and he sounds like a tough customer. But maybe he's just being efficient. And maybe it's more important to score points with the others in the room. I'd say see what you can find out about them.<</amy>>
+
+<<say '$player_name'>>Thanks Amy.<</say>>
+
+<<amy>>And <<print $player_name>>, don't forget you are one of the best people in the company to demo Pure and you know you can think on your feet. Know your stuff and you'll be ready for whatever they throw at you.<</amy>> 
+
+You always feel better after talking to Amy.
+
+<<include "PTMP Dashboard">>
+
+:: PTMP Maria
+You notice Maria is online, so you send her a message on Slack.
+
+<<say '$player_name'>>Hey Maria, I have a pre-tender meeting coming up and I'm thinking about what to present. Can you help?<</say>>
+
+<<maria>>Sure, who's it for? Tell me what you know about their needs and interests.<</maria>>
+
+<<if $Inv_ClientNeeds.count() >6>>You send Maria your notes.
+
+<<maria>>Wow, that's heaps of great intel! You're a smart cookie, looks like you've got plenty to go on. I'm happy to be on standby for your meeting if you need help with any curly questions though.<</maria>>
+
+<<linkreplace "Accept Maria's offer">><<set $PTM_PSMStandby to true>><<include "PTMP Maria Join Call">><
+<<if $Inv_ClientNeeds.has('they are considering whether to build their own system.')>><<say '$player_name'>>One more thing - I know one of the options they're considering is whether to build their own system.<</say>>
+
+<<maria>>Ha! That always works out well, doesn't it. In that case, make sure you mention <span class="clue"><<linkreplace 'INSERT AMBUSH HERE'>>INSERT AMBUSH HERE<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_Ambush' 'Ambush for building own system'>><</linkreplace>></span> when you talk to them. That should get them thinking.<</maria>><</if>>
+
+You thank Maria for her help.<</linkreplace>>
+
+<<include "PTMP Dashboard">>
+
+<<elseif $Inv_ClientNeeds.count() >0>><<set _randomItems to $Inv_ClientNeeds.toArray().pluckMany(1)>><<set _randomItems2 to $Inv_ClientDynamics.toArray().pluckMany(1)>>\
+<<say '$player_name'>>Well, one thing I know is <<print _randomItems>>.<</say>>
+
+<<maria>>I see. Well that is fairly common. A lot of the time the best way to discuss a topic depends on the client dynamics and relationships. What can you tell me about that?<</maria>>
+
+<<say '$player_name'>>Well, I can tell you for example that <<print _randomItems2>>.<</say>>
+
+<<maria>>Yes well I've certainly seen that several times before. Ok how about you send me the rest of what you have and I'll have a look and send you some suggestions.<</maria>>
+
+You thank Maria. Suggestions are always welcome.
+
+<<maria>>Meanwhile, consider finding out more from them before the meeting. In my experience, the more you know going in, the better.<</maria>>
+
+You thank Maria again, and suddenly realise it would be a good idea to have Maria's expertise <<linkappend "ready to hand during your presentation." t8n>><<set $PTM_PSMStandby to true>>
+
+You ask and, happily, she agrees. <<include "PTMP Maria Join Call">>
+
+<<include "PTMP Dashboard">><</linkappend>>
+
+<<elseif $Inv_ClientNeeds.count() == 0>><<say '$player_name'>>Well that's the problem, I don't know much at all.<</say>>
+
+<<maria>>Okaaaay... well I can probably suggest some things based on which stakeholders are involved. Who is going to be at the meeting?<</maria>>
+
+<<say '$player_name'>>The project manager. I'm not sure who else yet, to be honest.<</say>>
+
+<<maria>>Ok. Well maybe find that out first? Otherwise I don't envy you giving a presentation if you don't know who's coming or what they want.<</maria>>
+
+This isn't what you wanted to hear, but you thank Maria for her help anyway.
+
+<<include "PTMP Dashboard">><</if>>
+
+:: PTMP Jeorg
+
+[NEED CONTENT HERE]
+
+
+:: PTMP Contact Sean

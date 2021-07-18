@@ -1,0 +1,14 @@
+:: Features List
+
+<ul>
+<li>Main features of the basic module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Main features of the basic module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Main features of the basic module'>><</link>>]</li>
+<li>Import module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Import module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Import module'>><</link>>]</li>
+<li>Grants management module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Grants management module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Grants management module'>><</link>>]</li>
+<li>Reporting and analytics [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Reporting and analytics'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Reporting and analytics'>><</link>>]</li>
+<li>APC management [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'APC management'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'APC management'>><</link>>]</li>
+<li>Security and authentication [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Security and authentication'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Security and authentication'>><</link>>]</li>
+<li>Local hosting and integration [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Local hosting and integration'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Local hosting and integration'>><</link>>]</li>
+<li>How academics can use Pure [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'How academics can use Pure'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'How academics can use Pure'>><</link>>]</li>
+<li>Pure Portal [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Pure Portal'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Pure Portal'>><</link>>]</li>
+<li>Managing and removing duplicates [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Managing and removing duplicates'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Managing and removing duplicates'>><</link>>]</li>
+</ul>

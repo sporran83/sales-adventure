@@ -1,5 +1,5 @@
 :: Chapter 2 Title
-
+<<set $PTMP_EmailsToSean to 0>>\
 You've reached <<linkappend "Part 2..." t8n>>
 
 Days since you first received the lead: <<print $sales_cycle>>
@@ -37,9 +37,187 @@ You nod, and do an impression of Sean. [[Amy laughs|Chapter 2 Intro - C]].
 
 <<say '$player_name'>>I can imagine.<</say>>
 
-<<amy>>Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>> 
+<<amy>>Yeah, so make the most of talking to them while you still can before the tender comes out, or you'll end up pulling your hair out like me.<</amy>>
 
-You can sense one of Amy's procurement rants coming on. Entertaining as these can be, you nevertheless decide to [[steer the conversation in a different direction|Pre-Tender Meeting Prep Dashboard]].
+<<say '$player_name'>>Thanks Amy.<</say>>
+
+Amy gives you a friendly nod and goes on her way. You turn back back to your desk - time to [[start preparing|Pre-Tender Meeting Purpose]]. 
+
+:: Pre-Tender Meeting Purpose
+<<set $PreTenderMeetingDuration to 60>>\
+You take a moment to read Sean's email again:
+
+<div class="toast toast--blue">
+   <div class="toast__content"><p class="toast__message">Hi $player_name,
+
+Following our initial investigations, we have determined that 8 suppliers will have the opportunity to give an early 1-hour presentation regarding our new publications management project.
+
+We invite you to come show us your system in two weeks' time. 
+
+Regards,
+Sean
+Project Manager</p>
+</div></div>
+
+You consider whether to [[reply to Sean now|PTMP Respond to Invitation][$PTM_InvitationResponse to 'immediately']], or take a few moments to [[gather your thoughts|PTMP Purpose][$PTM_InvitationResponse to 'not yet']] first?
+
+:: PTMP Purpose
+<<if visited("PTMP Accept Invitation As-Is") is 0>>Before replying to Sean, you decide to think carefully about the situation.<</if>>
+
+In your initial meeting with Sean, you set out to <<print $QualifyingMeetingPurpose>>. What is your <strong>overall</strong> priority for this meeting?
+* [[Build good rapport|Pre-Tender Meeting Prep Tutorial][$PreTenderMeetingPurpose to "build good rapport"]]
+* [[Gather information|Pre-Tender Meeting Prep Tutorial][$PreTenderMeetingPurpose to "gather information"]]
+* [[Make a good impression of you, your company and your product|Pre-Tender Meeting Prep Tutorial][$PreTenderMeetingPurpose to "make a good impression of you, your company and your product"]]
+* [[Influence the shape of the tender|Pre-Tender Meeting Prep Tutorial][$PreTenderMeetingPurpose to "influence the shape of the tender"]]
+* [[Dazzle them with an impressive presentation|Pre-Tender Meeting Prep Tutorial][$PreTenderMeetingPurpose to "dazzle them with an impressive presentation"]]
+
+:: Pre-Tender Meeting Prep Tutorial
+While you always have several important aims in any meeting, you realise that your <strong>overall</strong> objective in the upcoming pre-tender meeting is to <<print $PreTenderMeetingPurpose>>.
+
+The client has asked you to show the system. What approach would you like to take?
+
+[[Focus on showing the features and benefits of Pure|PTMP Focus on Features and Benefits]]
+[[Tailor a live demo directly to the client's needs|PTMP Focus on Client Needs]]
+
+:: PTMP Focus on Features and Benefits
+<<if visited("PTMP Focus on Client Needs") is 1>>You change your mind and decide to focus on giving a strong presentation that emphasises the many features and benefits of Pure. After all, you can't go wrong with that!
+<<else>>Realising that tailoring a live demo can be a lot of work and can be risky if it goes wrong, you decide you can't go wrong with a strong presentation that emphasises the many features and benefits of Pure.<</if>>
+
+Time to [[select some relevant features to present|PTMP Select Features to Present]].
+
+:: PTMP Focus on Client Needs
+Knowing that there is nothing as powerful as a demo that directly demonstrates a real solution to a client's need, you decide to structure your presentation around this. You take a moment to recall what you know about the client's needs:
+
+<div class="inventory"><<inventory '$Inv_ClientNeeds' '\n <span></span>'>></div>
+
+<<if $Inv_ClientNeeds.count() >6>>This is plenty to go on, you think. Time to [[select some relevant features to present]].
+<<elseif $Inv_ClientNeeds.count() >0>>This is certainly a start, you think, but is it enough? You have a nagging feeling that having more information would make for a more powerful presentation.
+
+Do you [[work with what you have|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]] about the client's needs?
+
+<<elseif $Inv_ClientNeeds.count() == 0>>Hmm. Really? You wonder how that is even possible, given all the time you've already put in.
+
+Well, what now?
+[[Try to find out more information|PTMP Realise You Need More Info]]
+[[Focus on showing features and benefits of Pure instead|PTMP Focus on Features and Benefits]]
+<<endif>>\
+
+:: PTMP Select Features to Present
+<<if $PTMP_WingIt == true>>You suddenly recover from your earlier doubts and realise you already have everything you need to make a great presentation after all!<</if>>
+
+From all the features of Pure, you consider which are most relevant to cover in the upcoming meeting. For each feature, you also need to decide whether to do a deep dive, or just give an overview.
+
+You aren't worried about the order or the timing at this stage since you know you will be able to make changes and fine-tune things before you finalise the agenda, so you just focus on what features to include.
+
+<<include 'Features List'>>
+
+<<if visited("PTMP Accept Invitation As-Is") is 0>>You are conscious that you haven't responded to Sean's invitation yet. Do you want to [[respond now|PTMP Respond to Invitation][$PTM_InvitationResponse to 'early']], or do [[a bit more preparation first|PTMP Dashboard]]?
+<<else>>From here, would you like to [[draft an agenda for the presentation|PTMP Draft Agenda]] or [[do something else|PTMP Dashboard]]?<</if>>
+
+:: PTMP Realise You Need More Info
+<<if visited("PTMP Realise You Need More Info") >1>>You realise you still don't have enough information to feel prepared for the upcoming meeting.
+<<else>>You realise that without more information, you will be going into the upcoming meeting unprepared.<</if>>
+
+<<if visited("Long Reply") is 0 and visited("PTMP Browse client's website") is 0>>[[Browse the client's website|PTMP Browse client's website]]<</if>>
+[[Contact Sean|PTMP Ask Sean Preparatory Questions]]
+[[Ask colleagues for advice|PTMP Speak to Colleagues]]
+[[Nevermind, let's wing it|PTMP Select Features to Present][$PTMP_WingIt to true]]
+
+:: PTMP Browse client's website
+You spend a while browsing the client's website for more information.
+
+It seems Sean's university <span class="clue"><<linkreplace 'has a strong research interest in bioinformatics'>>has a strong research interest in bioinformatics<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'a strong research interest in bioinformatics'>><</linkreplace>></span> and <span class="clue"><<linkreplace 'recently had some major grants renewed.'>>recently had some major grants renewed.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'recently had some major grants renewed'>><</linkreplace>></span>
+
+Do you [[work with what you have|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?
+
+:: PTMP Speak to Colleagues
+You realise you need some advice. Thankfully, you know exactly the right person to speak to:
+
+[[Amy, your colleague|PTMP Amy]]
+[[Maria, the product specialist|PTMP Maria]]
+[[Jeorg, your boss|PTMP Jeorg]]
+
+:: PTMP Respond to Invitation
+<<if $PTM_InvitationResponse is 'immediately'>>You don't want such an important email to drop off your radar, so you seize the initiative and reply straight away.
+<<elseif $PTM_InvitationResponse is 'early'>>Having had time to reflect on the situation, you respond to Sean's invtiation.<</if>>
+
+You consider whether to:
+* [[Accept the invitation as is|PTMP Accept Invitation As-Is]]
+* [[Ask Sean some preparatory questions|PTMP Ask Sean Preparatory Questions]]
+* [[Make a request|PTMP Make a Request]]
+
+:: PTMP Accept Invitation As-Is
+You thank Sean for the good news, accept the invitation and let him know you look forward to the opportunity to present to the team next fortnight.
+
+<<if visited("PTMP Purpose") is 0>>Time to [[start preparing|PTMP Purpose]].
+<<else>>With that done, you [[continue with your preparations|PTMP Dashboard]] for the meeting.<</if>>
+
+:: PTMP Ask Sean Preparatory Questions
+Although you're worried about annoying Sean, you realise Amy is right. Before the tender comes out, you need to find out as much as you can while you still have the chance to talk to the client.
+
+What do you want to ask Sean?
+
+<div class="choice-select"><input type="checkbox" id="PTMP_ClientPurpose" value="What do you hope to get out of the meeting?" class="chkGroup">What do you hope to get out of the meeting?
+<input type="checkbox" id="PTMP_Attendees" value="Who will be in attendance?" class="chkGroup">Who will be in attendance?
+<input type="checkbox" id="PTMP_SpecificTopics" value="Are there any specific topics I should address?" class="chkGroup">Are there any specific topics I should address or avoid?
+<<if visited("PTMP Realise You Need More Info") >0>><input type="checkbox" id="PTMP_RepairBadQualifying" value="Is there any other background can you give me about the project?" class="chkGroup">Is there any other background you can give me about the project?<</if>>
+</div>
+
+<<button [[Email Sean|PTMP Email Sean][$PTMP_EmailsToSean to $PTMP_EmailsToSean + 1]]>>
+	<<set $PTMP_ClientPurpose = $("#PTMP_ClientPurpose").prop("checked")>>
+	<<set $PTMP_Attendees = $("#PTMP_Attendees").prop("checked")>>
+	<<set $PTMP_SpecificTopics = $("#PTMP_SpecificTopics").prop("checked")>>
+	<<set $PTMP_RepairBadQualifying = $("#PTMP_RepairBadQualifying").prop("checked")>>
+<</button>>
+
+:: PTMP Make a Request
+
+[Ideas]
+Ask for more time
+Ask to invite more stakeholders
+Ask to reschedule
+
+
+:: PTMP Email Sean
+<<set _EmailItems to 0>>\
+<<if $PTMP_ClientPurpose is true>><<set _EmailItems to _EmailItems + 1>><<set _Purpose to true>><</if>>\
+<<if $PTMP_Attendees is true>><<set _EmailItems to _EmailItems + 1>><<set _Attendees to true>><</if>>\
+<<if $PTMP_SpecificTopics is true>><<set _EmailItems to _EmailItems + 1>><<set _SpecificTopics to true>><</if>>\
+<<if $PTMP_RepairBadQualifying is true>><<set _EmailItems to _EmailItems + 1>><<set _Repair to true>><</if>>\
+
+You take the risk and send Sean an email with your questions, keeping it as short and to the point as possible.
+
+<div class="toast toast--yellow">
+   <div class="toast__content"><p class="toast__message">Hi Sean, 
+
+Thanks for your message, looking forward to presenting to you and your colleages. I would like to ask you for some more information about the meeting if you don't mind - so we can be prepare properly and so we can be sure to support the university's agenda. 
+
+Could you give me a bit more detail about <<if _Purpose is true>><<set _Purpose to false>>the purpose of the meeting, what you expect to come out of it, and how we best support that?<<elseif _Attendees is true>><<set _Attendees to false>>which stakeholders will attend in addition to yourself and others from the Research Office. For example, will there be people from IT, grants management, the library, compliance, or the tech transfer office?<<elseif _Repair is true>><<set _Repair to false>>the project and any other background you think is relevant?<<elseif _SpecificTopics is true>><<set _SpecificTopics to false>>specific topics you would like to see addressed, or which you don't need to cover?<</if>>
+
+<<if _EmailItems > 1>>Also, it would be super useful to know <<if _Attendees is true>><<set _Attendees to false>>which stakeholders will attend in addition to yourself and others from the Research Office. For example, will there be people from IT, grants management, the library, compliance, or the tech transfer office?<<elseif _Repair is true>><<set _Repair to false>>more about the project and any other background you think is relevant<<elseif _SpecificTopics is true>><<set _SpecificTopics to false>>if there are specific topics you would like to see addressed, or which you don't need to cover.
+<</if>><</if>>
+
+<<if _EmailItems > 2>>I would also like to ask <<if _SpecificTopics is true>><<set _SpecificTopics to false>>if there are specific topics you would like to see addressed, or which you don't need to cover.<<elseif _Repair is true>><<set _Repair to false>>if you can provide any further information about the project and any other background you think is relevant.<</if>><</if>>
+
+<<if _EmailItems > 3>>Finally, <<if _Repair is true>><<set _Repair to false>>any other background you are able to provide about the project would also be very much appreciated.<</if>><</if>>
+
+Let me know if it is easier to have a quick call. Look forward to hearing from you soon.
+
+Best regards,
+<<print $player_name>></p>
+</div></div>
+
+While you wait for a reply from Sean, you move onto other things.
+
+<<include "PTMP Dashboard">>
+
+:: PTMP Maria Join Call
+You feel relieved. Having Maria on standby will be a huge help.
+
+<<say '$player_name'>>I would love that - thanks so much.<</say>>
+
+<<maria>>No problem - send me the details, I'll be there<</maria>>
+
 
 :: Chapter 2 Early Prepare Meeting
 You start preparing an early outline for what you will present in the meeting, based on what you know.
@@ -53,28 +231,6 @@ What you have to show
 <<linkreplace 'Show Prep'>>Show Prep. <div class="inventory"><<inventory '$Inv_PreTenderPrep' '\n <span></span>'>></div><</linkreplace>>
 
 
-
-:: Chapter 2 Intro - D
-<<say '$player_name'>>I need your advice. They haven't given me much information or even told me who is coming to the meeting. I feel like I should ask for more details, but their PM seems pretty impatient and I don't want to annoy him.<</say>>
-
-<<amy>>Haha yeah remember last year when Lindsay kept asking that client like a hundred questions to prepare the perfect demo and then he never heard from them again?<</amy>>
-
-<<say '$player_name'>>Have you heard from Lindsay lately?<</say>>
-
-<<amy>>Last I saw, his LinkedIn still says 'Open to Work'.<</amy>>
-
-<<say '$player_name'>>Yikes. So what's your advice?<</say>>
-
-Amy turns serious for a moment and [[looks you in the eye|Chapter 2 Intro - E]].
-
-:: Chapter 2 Intro - E
-<<amy>>Well honestly <<print $player_name>>, you are one of the best people in the company to demo Pure and you know you can think on your feet.
-
-I haven't spoken to this Sean guy, but all I know is - make the most of talking to them while you still can before the tender comes out, or you'll end up pulling your hair out like me.<</amy>>
-
-<<say '$player_name'>>Thanks Amy.<</say>>
-
-Amy gives you a friendly nod and goes on her way. Turning back to your desk, you allow your mind to [[wander for a few moments|Chapter 2 Intro 2]].
 
 
 :: Chapter 2 Intro 2

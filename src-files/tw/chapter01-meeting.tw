@@ -1,8 +1,4 @@
 :: 1st Meeting
-<<set $PointsQualifyDemo to false>>\
-<<set $PointsQualifyWhy to false>>\
-<<set $PointsQualifyWho to false>>\
-<<set $PointsQualifyTimeline to false>>\
 It's nearly time for your meeting with Sean, <<print $sales_cycle>> days after first receiving their email.
 
 You open Zoom a few minutes before the appointed time. Sean is already in the waiting room. It takes a few seconds to connect to audio and then Sean appears. You notice he has his arms folded.
@@ -30,7 +26,7 @@ You start to ask Sean your first question, but he quickly interrupts you.
 You are a little taken aback, but you quickly compose yourself and realise exactly what you need to do next.
 
 * [[Give the demo|Give Demo in Qualifying Meeting]]
-* [[Push back|Refuse Demo in Qualifying Meeting]]
+* [[Push back|Refuse Demo in Qualifying Meeting][$Rep_Sean to $Rep_Sean + 5]]
 
 :: Even More Demo
 Sean asks you a follow-up question about grants management, so you spend a few minutes hastily showing him that section of the product. <<if visited("Follow up Materials") >0>>You realise it's the same section he was asking about in his email.<<endif>>
@@ -49,17 +45,17 @@ At this point you're now almost out of time, and Sean says he has [[another meet
 <<set $questions_before_demo to $questions_before_demo + 1>>\
 You consider what to do next:
 
-<<if $QualifyIntroCompany is true>>* [[Give a background of your company and its values|Q-Intro Company][$QualifyIntroCompany to false]]<<endif>>\
-<<if $QualifyIntroTeam is true>>* [[Explain the roles and responsibilities of people on your team|Q-Intro Team][$QualifyIntroTeam to false]]<<endif>>\
+<<if $QualifyIntroCompany is true>>* [[Give a background of your company and its values|Q-Intro Company][$QualifyIntroCompany to false; $Rep_Sean to $Rep_Sean - 1]]<<endif>>\
+<<if $QualifyIntroTeam is true>>* [[Explain the roles and responsibilities of people on your team|Q-Intro Team][$QualifyIntroTeam to false; $Rep_Sean to $Rep_Sean - 1]]<<endif>>\
 <<if $QualifyIntroProduct is true>>* [[Give an overview of your product's features|Q-Intro Product][$QualifyIntroProduct to false]]<<endif>>\
-<<if $QualifyRapport is true>>* [[Find an opportunity to connect about something other than work|Qualify Rapport][$QualifyRapport to false]]<<endif>>\
-<<if $QualifyWhy is true>>* [[Discuss what drove the client to reach out to you|Qualify Why][$QualifyWhy to false]]<<endif>>\
-<<if $QualifyTimeline is true>>* [[Discuss the client's timeline|Qualify Timeline][$QualifyTimeline to false]]<<endif>>\
-<<if $QualifyBudget is true>>* [[Discuss the client's budget|Qualify Budget][$QualifyBudget to false]]<<endif>>\
-<<if $QualifyWho is true>>* [[Find out who is on the project team|Qualify Who][$QualifyWho to false]]<<endif>>\
+<<if $QualifyRapport is true>>* [[Find an opportunity to connect about something other than work|Qualify Rapport][$QualifyRapport to false; $Rep_Sean to $Rep_Sean - 1]]<<endif>>\
+<<if $QualifyWhy is true>>* [[Discuss what drove the client to reach out to you|Qualify Why][$QualifyWhy to false; $Rep_Sean to $Rep_Sean + 2]]<<endif>>\
+<<if $QualifyTimeline is true>>* [[Discuss the client's timeline|Qualify Timeline][$QualifyTimeline to false; $Rep_Sean to $Rep_Sean + 1]]<<endif>>\
+<<if $QualifyBudget is true>>* [[Discuss the client's budget|Qualify Budget][$QualifyBudget to false; $Rep_Sean to $Rep_Sean - 5]]<<endif>>\
+<<if $QualifyWho is true>>* [[Find out who is on the project team|Qualify Who][$QualifyWho to false; $Rep_Sean to $Rep_Sean + 1]]<<endif>>\
 <<if $QualifySupplierCriteria is true>>* [[Discuss the client's criteria for selecting a new supplier|Qualify Supplier][$QualifySupplierCriteria to false]]<<endif>>\
-<<if $QualifyAnswerQuestions is true>>* [[Answer questions about the materials you sent|Answer Email Questions][$QualifyAnswerQuestions to false]]<<endif>>\
-<<if $QualifyGiveDemo is true>>* [[Demo the product|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
+<<if $QualifyAnswerQuestions is true>>* [[Answer questions about the materials you sent|Answer Email Questions][$QualifyAnswerQuestions to false; $Rep_Sean to $Rep_Sean + 3]]<<endif>>\
+<<if $QualifyGiveDemo is true>>* [[Give a brief live demo|Give Demo in Qualifying Meeting][$QualifyGiveDemo to false]]<<endif>>\
 <<if visited("Ask Qualifying Questions") > 1 >>* [[Wrap up the meeting|End Qualifying Meeting]]<<endif>>\
 
 :: End Qualifying Meeting
@@ -68,7 +64,7 @@ You consider what to do next:
 <<sean>>It's as I told you<</sean>>
 He looks at you.
 <<else>>In the remaining minutes of the meeting, you ask Sean about next steps.<<endif>>
-<<if $QualifyGiveDemo is true>><<sean>>Next steps?! Mate, I only wanted one thing from this meeting and that was to see a demo. I told you that clearly, but instead you went on a complete tangent.<</sean>>
+<<if $QualifyGiveDemo is true>><<set $Rep_Sean to $Rep_Sean - 10>><<sean>>Next steps?! Mate, I only wanted one thing from this meeting and that was to see a demo. I told you that clearly, but instead you went on a complete tangent.<</sean>>
 Stunned, you realise he's right.
 
 <<say '$player_name'>>I'm very sorry about that. Can I give you a demo right now?<</say>>
@@ -83,17 +79,15 @@ You thank Sean for his time and the meeting ends.
 Well, that was interesting. Time to [[take a look at your notes|Review Qualifying Meeting]].
 
 :: Qualify Why
-<<set $PointsQualifyWhy to true>>\
 You ask Sean to talk you through the project.
 
-<<sean>>The decision has been made by research committee that <span class="clue"><<linkreplace 'we need some way of managing our publications better - a new central solution'>>we need some way of managing our publications better - a new central solution<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'Research Committee needs a new central solution for managing their publications.'>><</linkreplace>></span>. I've been asked to start looking at <<linkappend "possible suppliers." t8n>>
+<<sean>>The decision has been made by research committee that <span class="clue"><<linkreplace 'we need some way of managing our publications better - a new central solution'>>we need some way of managing our publications better - a new central solution<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'Research Committee needs a new central solution for managing their publications'>><</linkreplace>></span>. I've been asked to start looking at <<linkappend "possible suppliers." t8n>>
 
-We are <span class="clue"><<linkreplace 'looking at a broad range of suppliers at this stage, including Symplectic and Converis'>>looking at a broad range of suppliers at this stage, including Symplectic and Converis.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they are looking at a broad range of suppliers including Symplectic and Converis.'>><</linkreplace>></span> As you can imagine, we are considering a <<linkappend "broad range of options." t8n>> For example, we are also talking to the computer science people to <span class="clue"><<linkreplace 'see if it is possible to build something in-house.'>>see if it's possible to build something in-house.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they are considering whether to build their own system'>><</linkreplace>></span><</linkappend>><</linkappend>><</sean>>
-* [[Ask why they need to manage their publications better|Qualify Why 2]]
+We are <span class="clue"><<linkreplace 'looking at a broad range of suppliers at this stage, including Symplectic and Converis'>>looking at a broad range of suppliers at this stage, including Symplectic and Converis.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they are looking at a broad range of suppliers including Symplectic and Converis'>><</linkreplace>></span> As you can imagine, we are considering a <<linkappend "broad range of options." t8n>> For example, we are also talking to the computer science people to <span class="clue"><<linkreplace 'see if it is possible to build something in-house.'>>see if it's possible to build something in-house.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they are considering whether to build their own system'>><</linkreplace>></span><</linkappend>><</linkappend>><</sean>>
+* [[Ask why they need to manage their publications better|Qualify Why 2][$Rep_Sean to $Rep_Sean + 1]]
 * [[Move on to another topic|Ask Qualifying Questions]]
 
 :: Give Demo in Qualifying Meeting
-<<set $PointsQualifyDemo to true>>\
 <<set $QualifyGiveDemo to false>>\
 <<say '$player_name'>>Ok, let me give you a demo. Just give a moment to open the tab and share my screen.<</say>>
 <<if $questions_before_demo == 2>><<sean>>Great, I was hoping you would come to that soon.<</sean>>
@@ -103,7 +97,7 @@ We are <span class="clue"><<linkreplace 'looking at a broad range of suppliers a
 You show Sean around the user interface and give a general overview, spending a few moments to explain each of the main sections.
 
 You realise you are quickly chewing through your meeting time.
-* [[Ask if he would like to see something specific|Even More Demo]]
+* [[Ask if he would like to go into more detail on something specific|Even More Demo][$Rep_Sean to $Rep_Sean + 3]]
 * [[Offer a more in-depth demo at another time|Offer Second Demo]]
 * [[Return to your original questions|Ask Qualifying Questions]]
 
@@ -163,9 +157,9 @@ It seems you have no alternative but to [[wrap things up|End Qualifying Meeting]
 :: Qualify Why 2
 You decide to probe further and ask if there are specific issues about the way they manage publications at the moment.
 
-Sean explains that at the moment <span class="clue"><<linkreplace 'they have enormous difficulty reporting their publications to funders.'>>they have enormous difficulty reporting their publications to funders.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'They have enormous difficulty reporting their publications to funders'>><</linkreplace>></span> They have some concerns about <span class="clue"><<linkreplace 'how well prepared they are for future major grants rounds.'>>how well prepared they are for future major grants rounds.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'They are concerned how well prepared they are for future major grants rounds'>><</linkreplace>></span>
+Sean explains that at the moment <span class="clue"><<linkreplace 'they have enormous difficulty reporting their publications to funders.'>>they have enormous difficulty reporting their publications to funders.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they have enormous difficulty reporting their publications to funders'>><</linkreplace>></span> They have some concerns about <span class="clue"><<linkreplace 'how well prepared they are for future major grants rounds.'>>how well prepared they are for future major grants rounds.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they are concerned how well prepared they are for future major grants rounds'>><</linkreplace>></span>
 
-You make a note of this, wondering if there are any <<linkappend "more use cases to discover." t8n>> When you ask, it turns out they are also <span class="clue"><<linkreplace 'thinking of starting a new biolab.'>>thinking of starting a new biolab.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'thinking of starting a new biolab'>><</linkreplace>></span> Since they are seeking government funding for this, <span class="clue"><<linkreplace 'they will also need analysis on what work they have done in this area.'>>they will also need analysis on what work they have done in this area.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'Need analysis that supports an application for government funding for a new biolab'>><</linkreplace>></span><</linkappend>>
+You make a note of this, wondering if there are any <<linkappend "more use cases to discover." t8n>> When you ask, it turns out they are also <span class="clue"><<linkreplace 'thinking of starting a new biolab.'>>thinking of starting a new biolab.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'thinking of starting a new biolab'>><</linkreplace>></span> Since they are seeking government funding for this, <span class="clue"><<linkreplace 'they will also need analysis on what work they have done in this area.'>>they will also need analysis on what work they have done in this area.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'they need analysis that supports an application for government funding for a new biolab'>><</linkreplace>></span><</linkappend>>
 
 [[Move on to another topic|Ask Qualifying Questions]]
 
@@ -183,7 +177,7 @@ You ask if other members of the research committee are involved and Sean tells y
 <<set $PointsQualifyTimeline to true>>\
 You ask Sean if he has a 'go-live' date in mind.
 
-He explains that they are at the early stages so it is too soon to have a firm date in mind, but <span class="clue"><<linkreplace 'a new system will need to be live in time for the next major grant round in 18 months time.'>>a new system will need to be live in time for the next major grant round in 18 months time.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'The new system will need to be live in time for the next major grant round in 18 months time'>><</linkreplace>></span>
+He explains that they are at the early stages so it is too soon to have a firm date in mind, but <span class="clue"><<linkreplace 'a new system will need to be live in time for the next major grant round in 18 months time.'>>a new system will need to be live in time for the next major grant round in 18 months time.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientNeeds' 'the new system will need to be live in time for the next major grant round in 18 months time'>><</linkreplace>></span>
 
 [[Move on to another topic|Ask Qualifying Questions]]
 

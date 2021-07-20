@@ -1,14 +1,149 @@
 :: PTMP Dashboard
+<<if State.length > ($PTMP_WaitforSean + 3) and $PTMP_WaitingforSean is true>>
+You notice you have a [[reply from Sean|PTMP Reply from Sean][$PTMP_WaitingforSean to false]].
+<<else>><<if $PTM_InvitationResponse is 'not yet'>>You are conscious that you haven't responded to Sean's invitation yet. Do you want to [[respond now|PTMP Respond to Invitation][$PTM_InvitationResponse to 'early']], or do [[a bit more preparation first|PTMP Dashboard Dummy][$PTM_InvitationResponse to 'still not yet']]?
+<<elseif $PTM_InvitationResponse is 'still not yet'>>Sean's invitation is still waiting. Do you want to [[respond now|PTMP Respond to Invitation][$PTM_InvitationResponse to 'later']], or do [[a bit more preparation first|PTMP Dashboard Dummy]]?
+<<else>>
+What now?
+
+* [[Work on your presentation|PTMP Draft Agenda]]
+* [[Speak to colleagues|PTMP Speak to Colleagues]]
+* [[Do some research|Placeholder]]
+* [[Contact the client|Placeholder]]
+* [[Do something else|Placeholder]]
+/% * [[Increment|PTMP Dashboard]] %/<</if>><</if>>
+
+:: PTMP Dashboard Dummy
 You consider what to do next.
 
-
+* [[Work on your presentation|PTMP Draft Agenda]]
+* [[Speak to colleagues|PTMP Speak to Colleagues]]
+* [[Do some research]]
+* [[Contact the client]]
+* [[Do something else]]
 
 :: PTMP Draft Agenda
+You decide to start putting together your overall presentation.
 
+Scheduled Duration: <<print $PreTenderMeetingDuration>> minutes.
 
+<strong>Attendees:</strong>
+<div class="inventory"><<inventory '$Inv_PTM_Attendees' '\n <span></span>'>></div>
+
+<strong>Your Draft Agenda</strong>
+<<print "<ul id=\"agenda\" class=\"list-group\">Drag items here...<br>" + State.variables.Inv_PTM_Agenda.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+<<button "Validate Agenda">>
+    /% Calculate time needed for agenda items %/
+    <<script>>
+        $(document).ready(function() {
+            State.variables.ptmTiming = 0;
+            $('#agenda > li').each(function(a){
+            State.variables.ptmTiming = State.variables.ptmTiming + +$(this).data('timing')
+        })
+    });
+    <</script>>
+  <<set $PTM_RunningTime to State.variables.ptmTiming>>
+  <<replace "#thingy">>Based on your agenda, the core meeting will take <<print $ptmTiming>> minutes, leaving you with <<print $PreTenderMeetingDuration - $ptmTiming>> minutes for questions and discussion.<</replace>>
+  <<run State.variables.Inv_PTM_Agenda.pickUp($agendaOrder)>>
+<</button>>
+
+<span id="thingy"></span>
+<hr>
+
+<em>Drag items from below onto the list above to build your draft agenda. Click the Validate Agenda button to calculate the running time</em>
+
+Options to include in your meeting agenda:
+<ul id="agendaoptions" class="list-group">
+    <li class="list-group-item" data-timing="5" data-id="Introductions">Introductions (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Give a recap of the project">Give a recap of the project (5 min)</li>
+    <li class="list-group-item" data-timing="2" data-id="Present slides about the company">Present slides about the company (2 min)</li>
+    <li class="list-group-item list-group-item-heading" data-timing="0" data-id="Overview of Key Features">Overview of Key Features</li>
+    <li class="list-group-item list-group-item-heading" data-timing="0" data-id="Live Demo">Live Demo - Deep Dive</li>
+    <li class="list-group-item list-group-item-heading" data-timing="0" data-id="Questions and Discussion">Questions and Discussion</li>
+    <li class="list-group-item" data-timing="5" data-id="Discuss next steps">Discuss next steps (5 min)</li>
+</ul>
+
+Feature options you've selected to give a general overview
+<<print "<ul id=\"OverviewList\" class=\"list-group\">" + State.variables.Inv_PTM_BriefOverview.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-timing=\"5\" data-id=\"'+inventoryList+'\">' + inventoryList + ' (5 min)' + '</li>'; }).join('') + "</ul>">>
+
+Feature options you've selected for a deep dive
+<<print "<ul id=\"DeepDiveList\" class=\"list-group\">" + State.variables.Inv_PTM_DeepDive.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-timing=\"15\" data-id=\"'+inventoryList+'\">' + inventoryList + ' (15 min)' + '</li>'; }).join('') + "</ul>">>
+
+[[Revise the mix of features you want to present|PTMP Select Features to Present]]
+[[Finalise the agenda and send to attendees|Placeholder]]
+[[Contact the client|Placeholder]]
+[[Do some research|Placeholder]]
+[[Speak to colleagues|PTMP Speak to Colleagues]]
+
+<<silently>><<done>><<script>>
+State.variables.sourceList = document.getElementById('agendaoptions');
+
+new Sortable(State.variables.sourceList, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.sourceList2 = document.getElementById('OverviewList');
+
+new Sortable(State.variables.sourceList2, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.sourceList3 = document.getElementById('DeepDiveList');
+
+new Sortable(State.variables.sourceList3, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.targetList = document.getElementById('agenda');
+
+new Sortable(State.variables.targetList, {
+        group: "shared",
+        animation: 150,
+        filter: '.filtered',
+        store: {
+        /**
+         * Get the order of elements. Called once during initialization.
+         * @param   {Sortable}  sortable
+         * @returns {Array}
+         */
+        get: function (sortable) {
+            State.variables.agendaOrder = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder ? State.variables.agendaOrder.split('|') : [];
+        },
+
+        /**
+         * Save the order of elements. Called onEnd (when the item is dropped).
+         * @param {Sortable}  sortable
+         */
+        set: function (sortable) {
+            State.variables.agendaOrder = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder.join('|'));
+        }
+    }
+    });
+<</script>>
+<</done>><</silently>>
+
+:: PTMP Speak to Colleagues
+<<if $PTMP_SpoketoAmy is true and $PTMP_SpoketoMaria is true and $PTMP_SpoketoJeorg is true>>Realising that you've probably got all the help from colleagues that you can for now, you change your mind and decide to try something else.<<set $PTMP_ColleaguesVisible to false>><<include 'PTMP Dashboard'>>
+<<else>>
+You realise you need some advice. Thankfully, you know exactly the right person to speak to:
+
+<<if $PTMP_SpoketoAmy is false>>[[Amy, your colleague|PTMP Amy]]<</if>>
+<<if $PTMP_SpoketoMaria is false>>[[Maria, the product specialist|PTMP Maria]]<</if>>
+<<if $PTMP_SpoketoJeorg is false>>[[Jeorg, your boss|PTMP Jeorg]]<</if>>
+<</if>>
 
 :: PTMP Amy
-You wander over to Amy's desk. She is on the phone.
+<<if $PTMP_StakeholdersDecision is 'undecided'>>[Ask Amy about stakeholders]<<else>>
+<<if $PTMP_EmailsToSean == 0 and visited("PTMP Accept Invitation As-Is") is 0>><<if visited("PTMP Amy") >1>>You wander back over to Amy's desk. She is on the phone again, and this time you decide not to wait around for her to finish.<<else>>You wander over to Amy's desk. She is on the phone.
 
 <<amy>>(on the phone) ...Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>>
 
@@ -32,12 +167,13 @@ Amy turns serious for a moment and looks you in the eye.
 
 <<amy>>And <<print $player_name>>, don't forget you are one of the best people in the company to demo Pure and you know you can think on your feet. Know your stuff and you'll be ready for whatever they throw at you.<</amy>> 
 
-You always feel better after talking to Amy.
-
+You always feel better after talking to Amy.<</if>>
+<<else>>You wander over to Amy's desk but she's not there right now.<</if>><</if>>
 <<include "PTMP Dashboard">>
 
 :: PTMP Maria
-You notice Maria is online, so you send her a message on Slack.
+<<if $PTMP_StakeholdersDecision is 'undecided'>>[Ask Maria about stakeholders]
+<<elseif visited("PTMP Maria") is 1>>You notice Maria is online, so you send her a message on Slack.
 
 <<say '$player_name'>>Hey Maria, I have a pre-tender meeting coming up and I'm thinking about what to present. Can you help?<</say>>
 
@@ -47,12 +183,12 @@ You notice Maria is online, so you send her a message on Slack.
 
 <<maria>>Wow, that's heaps of great intel! You're a smart cookie, looks like you've got plenty to go on. I'm happy to be on standby for your meeting if you need help with any curly questions though.<</maria>>
 
-<<linkreplace "Accept Maria's offer">><<set $PTM_PSMStandby to true>><<include "PTMP Maria Join Call">><
-<<if $Inv_ClientNeeds.has('they are considering whether to build their own system.')>><<say '$player_name'>>One more thing - I know one of the options they're considering is whether to build their own system.<</say>>
+<<linkreplace "Accept Maria's offer">><<set $PTM_PSMStandby to true>><<include "PTMP Maria Join Call">>
+<<if $Inv_ClientNeeds.has('they are considering whether to build their own system')>><<say '$player_name'>>One more thing - I know one of the options they're considering is whether to build their own system.<</say>>
 
 <<maria>>Ha! That always works out well, doesn't it. In that case, make sure you mention <span class="clue"><<linkreplace 'INSERT AMBUSH HERE'>>INSERT AMBUSH HERE<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_Ambush' 'Ambush for building own system'>><</linkreplace>></span> when you talk to them. That should get them thinking.<</maria>><</if>>
 
-You thank Maria for her help.<</linkreplace>>
+You thank Maria for her help.<</linkreplace>>\
 
 <<include "PTMP Dashboard">>
 
@@ -61,9 +197,9 @@ You thank Maria for her help.<</linkreplace>>
 
 <<maria>>I see. Well that is fairly common. A lot of the time the best way to discuss a topic depends on the client dynamics and relationships. What can you tell me about that?<</maria>>
 
-<<say '$player_name'>>Well, I can tell you for example that <<print _randomItems2>>.<</say>>
+<<say '$player_name'>><<if $Inv_ClientDynamics.count() >0>>Well, I can tell you for example that <<print _randomItems2>>.<<else>>To be honest I haven't found out much about that yet.<</if>><</say>>
 
-<<maria>>Yes well I've certainly seen that several times before. Ok how about you send me the rest of what you have and I'll have a look and send you some suggestions.<</maria>>
+<<maria>><<if $Inv_ClientDynamics.count() >0>>Yes well I've certainly seen that several times before.<</if>> Ok how about you send me the rest of what you have and I'll have a look and send you some suggestions.<</maria>>
 
 You thank Maria. Suggestions are always welcome.
 
@@ -86,6 +222,17 @@ You ask and, happily, she agrees. <<include "PTMP Maria Join Call">>
 This isn't what you wanted to hear, but you thank Maria for her help anyway.
 
 <<include "PTMP Dashboard">><</if>>
+<<elseif visited("PTMP Maria") >1>>Looks like Maria isn't online right now. You wonder whether to leave a message, but decide against it for now.
+
+<<include "PTMP Dashboard">>
+<</if>>
+
+:: PTMP Maria Join Call
+You feel relieved. Having Maria on standby will be a huge help.
+
+<<say '$player_name'>>I would love that - thanks so much.<</say>>
+
+<<maria>>No problem - send me the details, I'll be there.<</maria>>
 
 :: PTMP Jeorg
 

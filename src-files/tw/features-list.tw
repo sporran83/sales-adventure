@@ -1,6 +1,6 @@
 :: Features List
-
-<ul>
+<<silently>>
+/% <ul>
 <li>Main features of the basic module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Main features of the basic module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Main features of the basic module'>><</link>>]</li>
 <li>Import module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Import module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Import module'>><</link>>]</li>
 <li>Grants management module [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Grants management module'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Grants management module'>><</link>>]</li>
@@ -11,4 +11,108 @@
 <li>How academics can use Pure [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'How academics can use Pure'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'How academics can use Pure'>><</link>>]</li>
 <li>Pure Portal [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Pure Portal'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Pure Portal'>><</link>>]</li>
 <li>Managing and removing duplicates [?] [<<link 'Deep Dive'>><<pickup '$Inv_PTM_DeepDive' unique 'Managing and removing duplicates'>><</link>>] [<<link 'Brief Overview'>><<pickup '$Inv_PTM_BriefOverview' unique 'Managing and removing duplicates'>><</link>>]</li>
+</ul> %/
+
+/% Create a sortable list dynamically populated with inventory and save the order as an array %/
+<</silently>>
+<strong>Give an overview of these features</strong>
+<<print "<ul id=\"OverviewList\" class=\"list-group\">Drag items here...<br>" + State.variables.Inv_PTM_BriefOverview.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+<strong>Do a deep dive on these features</strong>
+<<print "<ul id=\"DeepDiveList\" class=\"list-group\">Drag items here...<br>" + State.variables.Inv_PTM_DeepDive.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+<strong>Pure features to choose from</strong>
+<ul id="FeaturesList" class="list-group">
+    <li class="list-group-item" data-id="Basic module">Basic module</li>
+    <li class="list-group-item" data-id="Import module">Import module</li>
+    <li class="list-group-item" data-id="Grants management module">Grants management module</li>
+    <li class="list-group-item" data-id="Reporting and analytics">Reporting and analytics</li>
+    <li class="list-group-item" data-id="APC management">APC management</li>
+    <li class="list-group-item" data-id="Security and authentication">Security and authentication</li>
+    <li class="list-group-item" data-id="Local hosting and integration">Local hosting and integration</li>
+    <li class="list-group-item" data-id="Pure for Academic Staff">Pure for Academic staff</li>
+    <li class="list-group-item" data-id="Pure Portal">Pure Portal</li>
+    <li class="list-group-item" data-id="Managing and removing duplicates">Managing and removing duplicates</li>
 </ul>
+
+<<silently>><<done>><<script>>
+State.variables.sourceList = document.getElementById('FeaturesList');
+
+new Sortable(State.variables.sourceList, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.targetList = document.getElementById('OverviewList');
+
+new Sortable(State.variables.targetList, {
+        group: "shared",
+        animation: 150,
+        filter: '.filtered',
+        store: {
+        /**
+         * Get the order of elements. Called once during initialization.
+         * @param   {Sortable}  sortable
+         * @returns {Array}
+         */
+        get: function (sortable) {
+            State.variables.agendaOrder = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder ? State.variables.agendaOrder.split('|') : [];
+        },
+
+        /**
+         * Save the order of elements. Called onEnd (when the item is dropped).
+         * @param {Sortable}  sortable
+         */
+        set: function (sortable) {
+            State.variables.agendaOrder = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder.join('|'));
+        }
+    }
+    });
+
+
+State.variables.targetList2 = document.getElementById('DeepDiveList');
+
+new Sortable(State.variables.targetList2, {
+        group: "shared",
+        animation: 150,
+        filter: ".ignore-elements",
+        store: {
+        /**
+         * Get the order of elements. Called once during initialization.
+         * @param   {Sortable}  sortable
+         * @returns {Array}
+         */
+        get: function (sortable) {
+            State.variables.agendaOrder2 = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder2 ? State.variables.agendaOrder2.split('|') : [];
+        },
+
+        /**
+         * Save the order of elements. Called onEnd (when the item is dropped).
+         * @param {Sortable}  sortable
+         */
+        set: function (sortable) {
+            State.variables.agendaOrder2 = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder2.join('|'));
+        }
+    }
+    });
+<</script>>
+<</done>><</silently>>
+
+<<button [[Remember Selection|PTMP Update Feature Choice]]>>
+  <<run State.variables.Inv_PTM_BriefOverview.pickUp($agendaOrder)>>
+  <<run State.variables.Inv_PTM_DeepDive.pickUp($agendaOrder2)>>
+<</button>>
+
+:: PTMP Update Feature Choice
+It's always tough deciding what exactly what features to show to clients, but you feel confident that the selection you've made will form the basis of a strong presentation.
+
+<<include 'PTMP Dashboard'>>
+
+:: Placeholder
+
+[CONTENT NOT READY YET]

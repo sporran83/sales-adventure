@@ -8,7 +8,6 @@ What do you want to do now?
 [[Contact the client]]
 
 :: Edit High-Level Agenda
-
 <<done>><<script>>
 State.variables.sourceList = document.getElementById('listLeft');
 
@@ -30,8 +29,8 @@ new Sortable(State.variables.targetList, {
          * @returns {Array}
          */
         get: function (sortable) {
-            State.variables.order = localStorage.getItem(sortable.options.group.name);
-            return State.variables.order ? State.variables.order.split('|') : [];
+            State.variables.agendaOrder = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder ? State.variables.agendaOrder.split('|') : [];
         },
 
         /**
@@ -39,8 +38,8 @@ new Sortable(State.variables.targetList, {
          * @param {Sortable}  sortable
          */
         set: function (sortable) {
-            State.variables.order = sortable.toArray();
-            localStorage.setItem(sortable.options.group.name, State.variables.order.join('|'));
+            State.variables.agendaOrder = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder.join('|'));
         }
     }
     });
@@ -56,14 +55,16 @@ What is your high-level agenda for the meeting?
     <li class="list-group-item" data-id="Introductions">Introductions</li></ul>
 
 <<button [[Confirm Agenda]]>>
-  <<set $listOrder to $order>>
-  <<pickup '$Inv_PreTenderMeetingAgenda' unique '$listOrder'>>
+  <<set $listOrder to $agendaOrder>>
+  /% <<run State.variables.Inv_PreTenderMeetingAgenda.pickUp(State.variables.agendaOrder.pluck(State.variables.agendaOrder, 'dataIdAttr'))>> %/
+  /% <<pickup '$Inv_PreTenderMeetingAgenda' unique '$agendaOrder'>> %/
+  <<run State.variables.Inv_PreTenderMeetingAgenda.pickUp($agendaOrder)>>
 <</button>>
 
 What you can include in the meeting:
 <ul id="listLeft" class="list-group">
-    <li class="list-group-item" data-id="Give a recap of the project">Give a recap of the project</li>
-    <li class="list-group-item" data-id="Present slides about the company">Present slides about the company</li>
+    <li class="list-group-item" data-id="1">Give a recap of the project</li>
+    <li class="list-group-item" data-id="2">Present slides about the company</li>
     <li class="list-group-item" data-id="Present slides about the product">Present slides about the product</li>
     <li class="list-group-item" data-id="Give a live demo">Give a live demo</li>
     <li class="list-group-item" data-id="Ask the client some questions">Ask the client some questions</li>
@@ -73,11 +74,19 @@ What you can include in the meeting:
 
 :: Confirm Agenda
 
+<div class="inventory"><<inventory '$Inv_PTM_BriefOverview' '\n <span></span>'>></div>
+<div class="inventory"><<inventory '$Inv_PTM_DeepDive' '\n <span></span>'>></div>
+
+[[Features List]]
+
 <div class="inventory"><<inventory '$Inv_PreTenderMeetingAgenda' '\n <span></span>'>></div>
+<div class="inventory"><<inventory '$Inv_Test' '\n <span></span>'>></div>
 
-Customise
+<div class="inventory"><<print $listOrder[2]>></div>
 
+<ul id="listy"></ul>
 
+<<print "<ul id=\"listy\" class=\"list-group\">" + State.variables.Inv_PreTenderMeetingAgenda.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
 
 
 :: Prepare Pre-Tender Presentation

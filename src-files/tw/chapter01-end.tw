@@ -43,6 +43,6 @@ Sean
 Project Manager</p>
 </div></div>
 
-How interesting! This is quickly becoming one of the more promising projects in your portfolio. You begin thinking about how best to prepare.
+How interesting!<<if $QualifyMeetingMissed is true>> All those detailed email responses must have impressed Sean, you think.<</if>> This is quickly becoming one of the more promising projects in your portfolio. You begin thinking about how best to prepare.
 
 [[Begin Part 2|Chapter 2 Title]]

@@ -33,6 +33,7 @@ How do you want to skip to Chapter 2?
 <</button>>
 
 <<button [[Scenario D|Chapter 2 Title]]>>
+	<<set $QualifyingMeetingPurpose to "make a good impression of you, your company and your product">>
 	<<set $QualifyMeetingMissed to true>>
 	<<set $Rep_Sean to 50>>
 	<<set $sales_cycle to 50>>

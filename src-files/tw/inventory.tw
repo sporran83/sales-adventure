@@ -1,7 +1,7 @@
 :: Inventory
 So far, here's what you know:
 
-<strong>Client's background</strong>
+<strong>General Info</strong>
 <div class="inventory"><<inventory '$Inv_ClientBackground' '\n <span></span>'>></div>
 
 <strong>What you've found out about the client's needs</strong>
@@ -9,13 +9,5 @@ So far, here's what you know:
 
 <strong>Relationships and dynamics</strong>
 <div class="inventory"><<inventory '$Inv_ClientDynamics' '\n <span></span>'>></div>
-
-/% if the inventory contains nothing, show "nothing" \
-<<if $inventory.length is 0>>\
-    Nothing.
-<<else>>\
-    the Array#join() method combines all array elements into a single string, with each element separated by the argument given \
-    * <<= $inventory.join('<br>* ')>>.
-<</if>>%/
 
 <<back>>

@@ -1,0 +1,231 @@
+:: Pre-Tender Meeting Prep Dashboard
+
+What do you want to do now?
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Edit High-Level Agenda
+<<done>><<script>>
+State.variables.sourceList = document.getElementById('listLeft');
+
+new Sortable(State.variables.sourceList, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.targetList = document.getElementById('listRight');
+
+new Sortable(State.variables.targetList, {
+        group: "shared",
+        animation: 150,
+        store: {
+        /**
+         * Get the order of elements. Called once during initialization.
+         * @param   {Sortable}  sortable
+         * @returns {Array}
+         */
+        get: function (sortable) {
+            State.variables.agendaOrder = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder ? State.variables.agendaOrder.split('|') : [];
+        },
+
+        /**
+         * Save the order of elements. Called onEnd (when the item is dropped).
+         * @param {Sortable}  sortable
+         */
+        set: function (sortable) {
+            State.variables.agendaOrder = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder.join('|'));
+        }
+    }
+    });
+<</script>>
+<</done>>
+
+What is your high-level agenda for the meeting?
+
+<em>(Drag and drop items into your draft high-level agenda and reorder them as you wish. You will have an opportunity to specify detailed content and timing for each agenda item later)</em>
+
+<strong>Draft high-level meeting agenda</strong>
+<ul id="listRight" class="list-group">
+    <li class="list-group-item" data-id="Introductions">Introductions</li></ul>
+
+<<button [[Confirm Agenda]]>>
+  <<set $listOrder to $agendaOrder>>
+  /% <<run State.variables.Inv_PreTenderMeetingAgenda.pickUp(State.variables.agendaOrder.pluck(State.variables.agendaOrder, 'dataIdAttr'))>> %/
+  /% <<pickup '$Inv_PreTenderMeetingAgenda' unique '$agendaOrder'>> %/
+  <<run State.variables.Inv_PreTenderMeetingAgenda.pickUp($agendaOrder)>>
+<</button>>
+
+What you can include in the meeting:
+<ul id="listLeft" class="list-group">
+    <li class="list-group-item" data-id="1">Give a recap of the project</li>
+    <li class="list-group-item" data-id="2">Present slides about the company</li>
+    <li class="list-group-item" data-id="Present slides about the product">Present slides about the product</li>
+    <li class="list-group-item" data-id="Give a live demo">Give a live demo</li>
+    <li class="list-group-item" data-id="Ask the client some questions">Ask the client some questions</li>
+    <li class="list-group-item" data-id="Respond to questions from the client">Respond to questions from the client</li>
+    <li class="list-group-item" data-id="Discuss next steps">Discuss next steps</li>
+</ul>
+
+:: Confirm Agenda
+
+<div class="inventory"><<inventory '$Inv_PTM_BriefOverview' '\n <span></span>'>></div>
+<div class="inventory"><<inventory '$Inv_PTM_DeepDive' '\n <span></span>'>></div>
+
+[[Features List]]
+
+<div class="inventory"><<inventory '$Inv_PreTenderMeetingAgenda' '\n <span></span>'>></div>
+<div class="inventory"><<inventory '$Inv_Test' '\n <span></span>'>></div>
+
+<div class="inventory"><<print $listOrder[2]>></div>
+
+<ul id="listy"></ul>
+
+<<print "<ul id=\"listy\" class=\"list-group\">" + State.variables.Inv_PreTenderMeetingAgenda.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+
+:: Prepare Pre-Tender Presentation
+
+Add a recap of Seans project
+You design a additional 5 min demo to convey ease of use to academics 
+    - General intro to UI 
+    - Main features of the basic module of interest to all stakeholders 
+    - Reporting and analytical features for Sean's main purposes 
+    - Key features of the grants management module for the grants team 
+    - APC management features for the library 
+    - Ability for local hosting and integration 
+    - Ease of use of academics' main tasks; adding publications, etc.
+
+[[Draft an agenda|Draft Pre-Tender Meeting Agenda]]
+[[Prepare slide deck]]
+[[Rehearse live demo script]]
+
+Or you could...
+
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Pre-Tender Meeting Agenda
+Here is the latest draft agenda for your <<print $PreTenderMeetingDuration>>-minute presentation:
+
+<div class="inventory"><<inventory '$Inv_PreTenderMeetingAgenda' '\n <span></span>'>></div>
+
+:: Draft Pre-Tender Meeting Agenda
+
+/%
+<ul id="example1" class="list-group">
+    <li class="list-group-item" data-id="1">Item 1</li>
+    <li class="list-group-item" data-id="2">Item 2</li>
+    <li class="list-group-item" data-id="3">Item 3</li>
+    <li class="list-group-item" data-id="4">Item 4</li>
+    <li class="list-group-item" data-id="5">Item 5</li>
+  </ul>
+
+<<done>>
+<<script>>
+    State.active.variables.sorted = Sortable.create(document.getElementById("example1"), {
+        animation: 150,
+        ghostClass: 'blue-background-class'
+        // handle: '.handle', // handle's class 
+    });
+    
+<</script>>
+<</done>>
+
+Current Order: <span id="blah"><<print $order>></span>
+
+<<button "Update Order">>
+<<script>>State.active.variables.order = State.active.variables.sorted.toArray();<</script>>
+<<set $order to State.active.variables.order>>
+<<replace "#blah">><<print $order>><</replace>>
+<</button>> %/
+
+/% Create a sortable list dynamically populated with inventory and save the order as an array %/
+
+What you can include in the meeting:
+<<print "<ul id=\"exampleLeft\" class=\"list-group\">" + State.variables.Inv_ClientNeeds.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+Your meeting agenda:
+<ul id="exampleRight" class="list-group">
+    <li class="list-group-item nope" data-id="Introductions">Introductions</li>
+  </ul>
+
+<<done>>
+<<script>>
+    Sortable.create(document.getElementById("exampleLeft"), {
+    group: {
+        name: 'shared',
+    },
+    animation: 150,
+    sort: false
+});
+
+    State.active.variables.sorted2 = Sortable.create(document.getElementById("exampleRight"), {
+    group: {
+        name: 'shared',
+        filter: '.nope',
+    },
+    animation: 150
+});
+<</script>>
+<</done>>
+
+<<button "Export Agenda">>
+/%<<set $samplesort to State.variables.initialOrder>>%/
+<<script>>State.active.variables.order2 = State.active.variables.sorted2.toArray();<</script>>
+<<set $order2 to State.active.variables.order2>>
+<<replace "#blah2">><<print $order2>><</replace>>
+<</button>>
+
+Current Agenda: <span id="blah2"><<print $order2>></span>
+
+[[Start]]
+
+
+:: Desktop Research
+What are you looking for?
+
+[[Browse the company's internal marketing repository]]
+[[Look for internal product information]]
+[[Browse the client's website]]
+[[Explore the web]]
+
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Talk to colleagues]]
+[[Contact the client]]
+
+:: Talk to colleagues
+Who do you want to talk to?
+
+[[Amy|Talk to Amy]]
+[[Maria|Talk to Maria]]
+[[Jeorg|Talk to Jeorg]]
+[[Klaus|Talk to Klaus]]
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Contact the client]]
+
+:: Contact the client
+Who do you want to contact?
+
+[[Contact Sean|Contact Sean]]
+[If you have met other stakeholders they will show here]
+
+Or you could...
+
+[[Prepare the presentation|Prepare Pre-Tender Presentation]]
+[[Do more research|Desktop Research]]
+[[Talk to colleagues]]
+

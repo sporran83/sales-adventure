@@ -1,0 +1,126 @@
+:: Features List
+<strong>Your Draft Agenda</strong>
+<<print "<ul id=\"agenda\" class=\"list-group\">Drag items here...<br>" + State.variables.Inv_PTM_Agenda.toArray().map(function (inventoryList) { return '<li class=\"list-group-item\" data-id=\"'+inventoryList+'\">' + inventoryList + '</li>'; }).join('') + "</ul>">>
+
+<<button "Check Running Time">>
+    /% Calculate time needed for agenda items 
+    <<script>>
+        $(document).ready(function() {
+            State.variables.ptmTiming = 0;
+            $('#agenda > li').each(function(a){
+            State.variables.ptmTiming = State.variables.ptmTiming + +$(this).data('timing')
+        })
+    }); 
+    <</script>>%/
+  <<run State.variables.Inv_PTM_Agenda.pickUp($agendaOrder)>>
+  <<set $PTM_RunningTime to State.variables.ptmTiming>>
+  <<set $PTM_RunningTimeCheck to $PTM_RunningTimeCheck + 1>>
+  <<replace "#message">>Based on your agenda, the core meeting will take <<print $ptmTiming>> minutes, leaving you with <<print $PreTenderMeetingDuration - $ptmTiming>> minutes available for questions and discussion.
+
+  You can keep experimenting with different agenda combinations, or:
+
+* [[Lock it in - I'm ready for the meeting|PTMP Ready for Meeting]]
+* [[Try to gather more information|PTMP Realise You Need More Info]]
+<<if $PTMP_AskMoreTime is 'not yet'>>* [[Ask Sean for more time|PTMP Ask for more time]]<</if>><</replace>>
+<</button>>
+
+<span id="message"></span>
+
+
+
+<div class="guidance">Drag items from below onto the list above to build your draft agenda. Click the Check Running Time button to see how long your planned meeting will take.</div>
+
+Options to include in your meeting agenda:
+<ul id="agendaoptions" class="list-group">
+    <li class="list-group-item" data-timing="5" data-id="Introductions">Introductions (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Give a recap of the project">Give a recap of the project (5 min)</li>
+    <li class="list-group-item" data-timing="3" data-id="Present slides about the company">Present slides about the company (3 min)</li>
+    <li class="list-group-item" data-timing="0" data-id="Questions and Discussion">Questions and Discussion</li>
+    <li class="list-group-item" data-timing="5" data-id="Discuss next steps">Discuss next steps (5 min)</li>
+</ul>
+
+Pure features to choose from:
+<ul id="FeaturesList" class="list-group">
+    <li class="list-group-item" data-timing="10" data-id="Basic module">Basic module (10 min)</li>
+    <li class="list-group-item" data-timing="10" data-id="Import module">Import module (10 min)</li>
+    <li class="list-group-item" data-timing="20" data-id="Grants management module">Grants management module (20 min)</li>
+    <li class="list-group-item" data-timing="10" data-id="Reporting and analytics">Reporting and analytics (10 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="APC management">APC management (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Security and authentication">Security and authentication (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Local hosting and integration">Local hosting and integration (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Pure for Academic Staff">Pure for Academic staff (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Pure Portal">Pure Portal (5 min)</li>
+    <li class="list-group-item" data-timing="5" data-id="Managing and removing duplicates">Managing and removing duplicates (5 min)</li>
+</ul>
+
+<<silently>><<done>><<script>>
+State.variables.sourceList = document.getElementById('agendaoptions');
+
+new Sortable(State.variables.sourceList, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.sourceList2 = document.getElementById('FeaturesList');
+
+new Sortable(State.variables.sourceList2, {
+        group: "shared",
+        animation: 150,
+        sort: false,
+});
+
+State.variables.targetList = document.getElementById('agenda');
+
+new Sortable(State.variables.targetList, {
+        group: "shared",
+        animation: 150,
+        filter: '.filtered',
+        store: {
+        /**
+         * Get the order of elements. Called once during initialization.
+         * @param   {Sortable}  sortable
+         * @returns {Array}
+         */
+        get: function (sortable) {
+            State.variables.agendaOrder = localStorage.getItem(sortable.options.group.name);
+            return State.variables.agendaOrder ? State.variables.agendaOrder.split('|') : [];
+        },
+
+        /**
+         * Save the order of elements. Called onEnd (when the item is dropped).
+         * @param {Sortable}  sortable
+         */
+        set: function (sortable) {
+            State.variables.agendaOrder = sortable.toArray();
+            localStorage.setItem(sortable.options.group.name, State.variables.agendaOrder.join('|'));
+        }
+    },
+        // Called by any change to the list (add / update / remove)
+        onSort: function (/**Event*/evt) {
+        State.variables.ptmTiming = 0;
+            $('#agenda > li').each(function(a){
+            State.variables.ptmTiming = State.variables.ptmTiming + +$(this).data('timing')
+        })
+        }
+    });
+<</script>>
+<</done>><</silently>>
+
+:: Placeholder
+
+[CONTENT NOT READY YET]
+
+:: PTMP Ready for Meeting
+
+You lean back in your chair, allowing yourself a moment of satisfaction to admire your handiwork. You know you are going to ace this meeting!
+
+[MORE CONTENT NEEDED]
+
+
+:: Scratch
+
+- Precondition with Sean
+- Get the lastest standard slides from the marketing repository
+- Make a list of universities in the country that already use Pure 
+- Read the objection handling sheet from the Sales Enablement drive

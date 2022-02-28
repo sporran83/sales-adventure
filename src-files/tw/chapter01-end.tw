@@ -18,7 +18,7 @@ Intriguing. You take a moment to <<linkappend "reflect on your meeting." t8n>>\
 <<if $PointsQualifyTimeline is false >>A pity you didn't find out anything about Sean's timeline. <<endif>>\
 <<if $PointsQualifyWho is false>>It would've been good to ask who is involved in the project besides Sean. <<endif>>\
 <<if $QualifyAnswerQuestions is true>>What about all those detailed questions Sean emailed you about? Oh well.<<endif>>\ %/
-<<if $Inv_ClientNeeds.count() >5>>You unconvered a great deal of useful information about the client's needs. This will surely be a big help to you in later meetings.
+<<if $Inv_ClientNeeds.count() >6>>You uncovered a great deal of useful information about the client's needs. This will surely be a big help to you in later meetings.
 <<elseif $Inv_ClientNeeds.count() >0>>You discovered a few pieces of useful information about the client's needs. You wonder if you could've found out any more from Sean.
 <<elseif $Inv_ClientNeeds.count() == 0>>After talking to Sean, you realise you still don't actually know anything about what he needs. You wonder what you could have done differently.
 <<endif>>\
@@ -43,6 +43,8 @@ Sean
 Project Manager</p>
 </div></div>
 
-How interesting! This is quickly becoming one of the more promising projects in your portfolio. You begin thinking about how best to prepare.
+The email includes a calendar invitation. With a satisfied flourish, you click to accept.
+
+How interesting!<<if $QualifyMeetingMissed is true>> All those detailed email responses must have impressed Sean, you think.<</if>> This is quickly becoming one of the more promising projects in your portfolio. You begin thinking about how best to prepare.
 
 [[Begin Part 2|Chapter 2 Title]]

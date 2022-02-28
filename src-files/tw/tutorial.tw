@@ -1,0 +1,78 @@
+:: Tutorial
+
+[[Click text that looks like this|Tutorial 2]] to take actions that advance the story.
+
+:: Tutorial 2
+
+<span class="clue"><<linkreplace 'Click text that looks like this'>>Click text that looks like this<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'you recorded your first note during the tutorial'>><</linkreplace>></span> to record useful information [[to your notes|Tutorial 3]].
+
+:: Tutorial 3
+Below, you can see a summary of notes you've recorded during the game. You can also access this at any time by clicking 'Check Your Notes' in the left hand sidebar.
+
+<strong>General Info</strong>
+<div class="inventory"><<inventory '$Inv_ClientBackground' '\n <span></span>'>></div>
+
+Finally, it's important to [[know about your reputation|Tutorial 4]].
+
+:: Tutorial 4
+<<drop '$Inv_ClientBackground' 'you recorded your first note during the tutorial'>>\
+'Reputation' reflects a key character's opinion of you. You have a separate Reputation rating with each key character. Actions you take can improve or reduce your standing, which can affect what happens in the story. Choose carefully.
+
+<<showmeter 'RepBar_Tutorial' `$Rep_Tutorial / $maxRep_Tutorial`>>
+
+Oh look, <<linkappend 'here comes Tutorial Tom to say hello.' t8n>>
+
+<<tutorialTom>>Hi <<print $player_name>>! I've heard all about you - it's so great to finally meet.<</tutorialTom>>
+
+[[Smile and wave to Tutorial Tom|Tutorial 5A][$Rep_Tutorial to $Rep_Tutorial + 5]]
+[[Ignore Tutorial Tom|Tutorial 5B][$Rep_Tutorial to $Rep_Tutorial - 5]]<</linkappend>>
+
+:: Tutorial 5A
+You greet Tutorial Tom with a heartfelt smile and wave.
+
+<<showmeter 'RepBar_Tutorial' `$Rep_Tutorial / $maxRep_Tutorial`>>
+
+<<tutorialTom>>I can see we're going to become great friends, <<print $player_name>>!<</tutorialTom>>
+
+Looks like you've improved your reputation rating with Tutorial Tom.
+
+That's everything covered for now. Are you ready to start the game?
+
+* [[Yes|Intro]]
+* [[No|Tutorial End]]
+
+:: Tutorial 5B
+You ignore Tutorial Tom, safe in the knowledge that you can't hurt his feelings since he is merely a narrative device concocted for the purposes of exposition.
+
+<<showmeter 'RepBar_Tutorial' `$Rep_Tutorial / $maxRep_Tutorial`>>
+
+<<tutorialTom>>Ok, I see how it is.<</tutorialTom>>
+
+Looks like you've damaged your reputation rating with Tutorial Tom. But that won't matter because, shortly after this, Tutorial Tom will be destroyed and replaced by Tutorial Terry, who has been waiting for his opportunity to shine.
+
+That's everything covered for now. Are you ready to start the game?
+
+* [[Yes|Tutorial Fake Start]]
+* [[No|Tutorial End]]
+
+:: Tutorial Fake Start
+It's a busy morning at the office and you're already onto your second coffee. Your colleague Amy walks past your desk.
+
+<<amy>>Hi <<print $player_name>>, are you coming to the meeting? Jeorg looks like he is in one of his moods today.<</amy>>
+
+<<tutorialTerry>>Hi <<print $player_name>>, Hi Amy. Are we hanging out? It's so great to be friends with you both<</tutorialTerry>>
+
+Whoops! Looks like Tutorial Terry didn't get the memo that the tutorial is finished and he is no longer needed now the game has started.
+
+You call security and they [[take Tutorial Terry away|Intro 2]]. You won't be seeing him again.
+
+:: Tutorial End
+Even though the tutorial is finished, you don't feel like starting the game just yet, so you sit around for a while just enjoying the moment.
+
+<<timed 5s>>This is nice, you think.
+<<next>>Eventually, you realise there isn't a link to click to advance the story.
+<<next>>Perhaps you're ready to start the game now?
+<<next>>Ok, I'll take you there in a few seconds.
+<<next>><<goto "Intro 2">>
+<</timed>>
+

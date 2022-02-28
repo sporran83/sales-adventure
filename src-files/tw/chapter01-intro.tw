@@ -1,12 +1,19 @@
-:: Start
+:: Start2
 Before we begin...
 
 ''What is your name?''
 <<textbox "$player_name" "" "Intro" autofocus>>
 
+
+
+Or...
+[[Skip to Chapter 2]] <strong>DEV/TESTING ONLY</strong>
+
 :: Intro
 <<if $player_name is "">>No name, huh? Ok then, let's call you 'Willy'. <<set $player_name to "Willy">><<endif>>\
-Welcome, <<print $player_name>>. It's time to [[begin your sales adventure...|Intro 2]]
+Welcome, <<print $player_name>>.
+
+Would you like to [[begin your sales adventure|Intro 2]] or [[take a short tutorial first|Tutorial]]?
 
 :: Intro 2
 It's a busy morning at the office and you're already onto your second coffee. Your colleague Amy walks past your desk.
@@ -20,19 +27,20 @@ You sigh and deflate a little. The All-Hands meeting! Is it really time for anot
 You take a final sip of coffee and check the time. You still have a few minutes before the All-Hands meeting starts, so you quickly [[check the shared sales inbox|Inbound Lead]].
 
 :: Inbound Lead
-You notice an unread email in the inbox - a new lead!
+You notice an unread email in the inbox:
 
 <div class="toast toast--blue">
    <div class="toast__content"><p class="toast__message">Hello. We've heard about your product and we would like some information.
 
-    Regards,
+   Regards,
 Sean</p>
   </div></div>
 
-You briefly consider what to do.
-* [[Write a quick reply now and get to the meeting|Short Reply]]
-* [[Take time to write a detailed reply|Long Reply]]
+Looks like you've got a new lead!
 
+You briefly consider what to do with Sean's email.
+* [[Write a quick reply now and get to the meeting|Short Reply]]
+* [[Take time to write a detailed reply and risk being a little late to the meeting|Long Reply]]	
 
 :: Short Reply
 This won't take a moment. Easier to deal with it now and then it's done, right? And you don't want to be last in for the All-Hands meeting. Jeorg has a habit of making fun of anyone who arrives late.
@@ -73,6 +81,7 @@ You sign off and send the email.
 Time to get to the [[All-Hands meeting]]!
 
 :: Long Reply
+<<set $Rep_Sean to $Rep_Sean + 3>>
 You decide you need time to craft a thoughtful reply, so you spend a while <<linkappend "browsing the client's website." t8n>>
 
 It seems Sean's university <span class="clue"><<linkreplace 'has a strong research interest in bioinformatics'>>has a strong research interest in bioinformatics<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'a strong research interest in bioinformatics'>><</linkreplace>></span> and <span class="clue"><<linkreplace 'recently had some major grants renewed.'>>recently had some major grants renewed.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_ClientBackground' 'recently had some major grants renewed'>><</linkreplace>></span>
@@ -116,7 +125,7 @@ You tell him there's lots of activity and in fact you just finished replied to a
 <<else>><<set $sales_cycle to $sales_cycle + 3>>A few days go by and you don't hear anything back from Sean. You consider whether to [[send a follow up email|Follow up Materials]] or [[leave it for now and move onto other things|Lost Momentum End][$sales_cycle to $sales_cycle + 5]].
 <<endif>><</linkappend>><</linkappend>>
 
-<<showmeter 'RepBar_Jeorg' `$Rep_Jeorg / $maxRep_Jeorg`>><div class="guidance"><<message 'What is this?' btn>>This meter represents a key character's opinion of you. Actions you take can improve or reduce your standing, which will affect what happens. Choose carefully.<</message>></div>
+<<showmeter 'RepBar_Jeorg' `$Rep_Jeorg / $maxRep_Jeorg`>>
 
 :: All-Hands meeting Late
 As you reach the meeting room, you hear the sound of your boss Jeorg's voice talking about the company financials. Damn! The All-Hands meeting has already started.
@@ -132,7 +141,7 @@ You spot Amy. She makes a face at you and gestures to the empty seat beside her.
 <<else>><<set $sales_cycle to $sales_cycle + 3>>A few days go by and you don't hear anything back from Sean. You consider whether to [[send a follow up email|Follow up Materials]] or [[leave it for now and move onto other things|Lost Momentum End][$sales_cycle to $sales_cycle + 5]].
 <<endif>><</linkappend>>
 
-<<showmeter 'RepBar_Jeorg' `$Rep_Jeorg / $maxRep_Jeorg`>><div class="guidance"><<message 'What is this?' btn>>This meter represents a key character's opinion of you. Actions you take can improve or reduce your standing, which will affect what happens. Choose carefully.<</message>></div>
+<<showmeter 'RepBar_Jeorg' `$Rep_Jeorg / $maxRep_Jeorg`>>
 
 :: Suggest Meeting
 Clearly you need to find out more about what Sean wants <<if visited("Long Reply") is 1>>so you finish by suggesting a meeting to discuss.<<else>>.
@@ -166,24 +175,24 @@ THE END
 You begin to doubt if you will hear back from the Sean, but the next day he replies. It's a long email with detailed questions about grants management, security and authentication - clearly he has carefully reviewed the information you sent!
 
 Sean's questions are quite complex. What do you want to do?
-* [[Offer a meeting to discuss|Qualifying Meeting Confirmed][$sales_cycle to $sales_cycle + 1]] 
+* [[Offer a meeting to discuss|Qualifying Meeting Confirmed][$sales_cycle to $sales_cycle + 1][$Rep_Sean to $Rep_Sean + 1]] 
 * [[Write a detailed email reply|Detailed Email reply][$sales_cycle to $sales_cycle + 2]]
 * [[Ask your product specialist for help|Ask PSM for help][$sales_cycle to $sales_cycle + 3]]
 
 :: Ask PSM for help
-<<if visited("Ask PSM for help") >1 >>You get in touch with the product specialist, but he is too busy to write another detailed email. He suggests you [[meet with the client|Qualifying Meeting Confirmed]] to find out more about what their situation, or simply [[write a detailed reply yourself|Detailed Email reply]].
+<<if visited("Ask PSM for help") >1 >>You get in touch with Maria the product specialist, but she is too busy to write another detailed email. She suggests you [[meet with the client|Qualifying Meeting Confirmed]] to find out more about what their situation, or simply [[write a detailed reply yourself|Detailed Email reply]].
 
-<<elseif visited("Ask PSM for help") is 1 >>You reply to Sean thanking him again for his interest and cc'ing your product specialist, Maria, who you say will be happy to answer his questions in more detail. 
+<<elseif visited("Ask PSM for help") is 1 >><<set $Rep_Sean to $Rep_Sean + 3>>You reply to Sean thanking him again for his interest and cc'ing your product specialist, Maria, who you say will be happy to answer his questions in more detail. 
 
 A few hours later, Maria follows up to introduce herself and writes a well-researched and carefully-worded response to each of the Sean's questions, linking to relevant pages and other resources on the company website where appropriate.
 
 A few days go by and you don't hear anything back. You consider whether to [[send a follow up email|Follow up Materials 2]] or [[leave it for now and move onto other things|Lost Momentum End]].<<endif>>
 
 :: Qualifying Meeting Confirmed
-<<set $sales_cycle to $sales_cycle + 3>>\
+<<set $sales_cycle to $sales_cycle + 3>><<set $QualifyMeetingMissed to false>>\
 Sean agrees to a 30-minute meeting in three days time. Great! Time to prepare.
 
-What is your overall priority for this meeting?
+What is your <strong>overall</strong> priority for this meeting?
 * [[Build good rapport|Prepare 1st Meeting][$QualifyingMeetingPurpose to "build good rapport"]]
 * [[Gather information|Prepare 1st Meeting][$QualifyingMeetingPurpose to "gather information"]]
 * [[Make a good impression of you, your company and your product|Prepare 1st Meeting][$QualifyingMeetingPurpose to "make a good impression of you, your company and your product"]]
@@ -207,24 +216,24 @@ You write a short follow up email to check if the client received the detailed a
 <<elseif visited("Ask PSM for help") >0 >>You remain polite, but secretly you are annoyed that Maria spent all that time writing the client a detailed response and they don't even seem bothered to acknowledge or respond. More time goes by. 
 <<endif>>\
 
-Things get busy and you get swept up in other work. You almost forget about Sean's email altogether. Finally, more than a month later, you [[get a response|Invite to 2nd meeting][$sales_cycle to $sales_cycle + 35]].
+Things get busy and you get swept up in other work. You almost forget about Sean's email altogether. Finally, more than a month later, you [[get a response|Invite to 2nd meeting][$sales_cycle to $sales_cycle + 35][$QualifyMeetingMissed to true]].
 
 :: Prepare 1st Meeting
 While you have several aims and all of them are important, you realise that ultimately the main thing you are keen to accomplish in your first meeting with Sean is to <<print $QualifyingMeetingPurpose>>.
 
-You think about what you want to do in the meeting. 30 minutes means you will have time for no more than five things.
+You think about what you want to do in the meeting. 30 minutes means you will have time for no more than five things. <<if visited("Ask More Time") is 0>>Of course, you could always write back to Sean and [[ask for more time|Ask More Time][$Rep_Sean to $Rep_Sean - 2]].<<endif>>
 
 <div class="choice-select"><input type="checkbox" id="QualifyIntroCompany" value="Give a background of your company and its values" class="chkGroup">Give a background of your company and its values
 <input type="checkbox" id="QualifyIntroTeam" value="Explain the roles and responsibilities of people on your team" class="chkGroup">Explain the roles and responsibilities of people on your team
 <input type="checkbox" id="QualifyTimeline" value="Discuss the client's timeline" class="chkGroup">Discuss the client's timeline
 <input type="checkbox" id="QualifySupplierCriteria" value="Discuss the client's criteria for selecting a new supplier" class="chkGroup">Discuss the client's criteria for selecting a new supplier
-<input type="checkbox" id="QualifyIntroProduct" value="Give an overview of your product's features" class="chkGroup">Give an overview of your product's features
-<input type="checkbox" id="QualifyGiveDemo" value="Give a demo of the product" class="chkGroup">Give a demo of the product
+<input type="checkbox" id="QualifyIntroProduct" value="Present some overview slides of your product's features" class="chkGroup">Present some overview slides of your product's features
+<input type="checkbox" id="QualifyGiveDemo" value="Give a live demo of the product" class="chkGroup">Give a live demo of the product
 <input type="checkbox" id="QualifyWhy" value="Discuss what drove Sean to reach out to you" class="chkGroup">Discuss what drove Sean to reach out to you
 <input type="checkbox" id="QualifyBudget" value="Discuss the client's budget" class="chkGroup">Discuss the client's budget
 <input type="checkbox" id="QualifyWho" value="Find out who is on the project team" class="chkGroup">Find out who is on the project team
 <input type="checkbox" id="QualifyRapport" value="Find an opportunity to connect with Sean through conversation about something other than work" class="chkGroup">Find an opportunity to connect with Sean through conversation about something other than work
-<<if visited("Follow up Materials") is 1>><input type="checkbox" id="QualifyAnswerQuestions" value="Answer questions about the materials you sent" class="chkGroup">Answer questions about the materials you sent<<endif>></div>\
+<<if visited("Any questions") is 1>><input type="checkbox" id="QualifyAnswerQuestions" value="Answer questions about the materials you sent" class="chkGroup">Answer questions about the materials you sent<<endif>></div>\
 <<script>>
 $(document).one(':passagerender', function (ev) {
 	function selectiveCheck (event) {
@@ -248,8 +257,6 @@ $(document).one(':passagerender', function (ev) {
 	}
 });
 <</script>>\
-
-<<if visited("Ask More Time") is 0>>Of course, you could always write back to Sean and [[ask for more time|Ask More Time]].<<endif>>
 
 Once you are sure about how you want to make use of your meeting time, you can click the button to confirm the meeting.
 
@@ -276,7 +283,7 @@ Ah well. Seems 30 minutes is all you're going to get. You go back to considering
 
 :: Confirm Qualifying Meeting
 You reply to Sean to thank him for agreeing to meet. You confirm the date and time and let him know you are looking forward to speaking soon. You consider whether or not to include a specific agenda.
-* [[Include an agenda|Precondition Qualifying Meeting][$PreconditionQualifyingMeeting to true]]
+* [[Include an agenda|Precondition Qualifying Meeting][$PreconditionQualifyingMeeting to true; $Rep_Sean to $Rep_Sean + 2]]
 * [[Don't include an agenda|Don't Precondition Qualifying Meeting][$PreconditionQualifyingMeeting to false]]
 
 :: Precondition Qualifying Meeting

@@ -1,0 +1,68 @@
+/* speech.css, by chapel; for use with speech.js */
+
+
+
+.say {
+   /* border: 1px solid #eee;
+    overflow: auto; */
+  
+  // layout
+  position: relative;
+  max-width: 30em;
+  
+  /* looks */
+  background-color: #FFA500;
+  color: #fff;
+  padding: 1.125em 1.5em;
+  border-radius: 1rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.say img {
+    max-width: 15%;
+    float: left;
+    margin-right: 1em;
+} 
+
+.say p:first-of-type {
+    font-weight: bold;
+    margin: 0.2em 0;
+    border-bottom: 1px solid #eee;
+}
+
+.say p:last-of-type {
+    padding: 0.5em 0;
+    margin: 0;
+}
+
+/* Character-specific speech colours */
+
+.amy {
+  background-color: #C7B689;
+  color: #fff;
+}
+
+.sean {
+  background-color: #1D72F3;
+  color: #fff;
+}
+
+.willy {
+  background-color: #1D72F3;
+  color: #fff;
+}
+
+.jeorg {
+  background-color: #6B8E23;
+  color: #fff;
+}
+
+.maria {
+  background-color: #BA55D3;
+  color: #fff;
+}
+
+.tutorialTom {
+  background-color: #a52a2a;
+  color: #fff;
+}

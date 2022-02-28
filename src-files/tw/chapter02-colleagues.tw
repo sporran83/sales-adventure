@@ -1,0 +1,147 @@
+:: PTMP Amy
+<<if $PTMP_EmailsToSean > 0>>You wander over to Amy's desk but she's not there right now. Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<<elseif $PTMP_EmailsToSean == 0 and visited("PTMP Amy") >1>>You wander back over to Amy's desk. She is on the phone again, and this time you decide not to wait around for her to finish. Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<<else>>You wander over to Amy's desk. She is on the phone.
+
+<<amy>>(on the phone) ...Yeah, it's one of those really ugly procurement portals that are annoying to use too. I don't know why they all insist on doing it this way. It's like they want to make it as difficult for themselves as possible to get a good result.<</amy>>
+
+You smile and wait for Amy to finish her procurement rant. Entertaining as these can be, today you need to steer the conversation in a different direction, so you quickly jump in once she hangs up.
+
+<<say '$player_name'>>So that client we talked about? I need your advice. They haven't given me much information or even told me who is coming to the meeting. I feel like I should ask for more details, but their PM seems pretty impatient and I don't want to annoy him.<</say>>
+
+<<amy>>Haha yeah remember last year when Lindsay kept asking that client like a hundred questions to prepare the perfect demo and then he never heard from them again?<</amy>>
+
+<<say '$player_name'>>Have you heard from Lindsay lately?<</say>>
+
+<<amy>>Last I saw, his LinkedIn still says 'Open to Work'.<</amy>>
+
+<<say '$player_name'>>Yikes. So what's your advice?<</say>>
+
+Amy turns serious for a moment and looks you in the eye.
+
+<<amy>>Well I haven't spoken to this Sean guy and he sounds like a tough customer. Maybe he's just being efficient. Either way, you probably want to know you have everyone in the room that you can score points with. I'd see if you an find out who else is involved.<</amy>>
+
+<<say '$player_name'>>Thanks Amy.<</say>>
+
+<<amy>>And <<print $player_name>>, don't forget you are one of the best people in the company to demo Pure and you know you can think on your feet. Know your stuff and you'll be ready for whatever they throw at you.<</amy>> 
+
+You always feel better after talking to Amy. Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<</if>>
+
+:: PTMP Maria
+<<if visited("PTMP Maria") >1>>Looks like Maria isn't online right now. You wonder whether to leave a message, but decide against it for now. Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<<elseif visited("PTMP Maria") is 1>>You notice Maria is online, so you send her a message on Slack.
+
+<<say '$player_name'>>Hey Maria, I have a pre-tender meeting coming up and I'm thinking about what to present. Can you help?<</say>>
+
+<<maria>>Sure, who's it for? Tell me what you know about their needs and interests.<</maria>>
+
+<<if $Inv_ClientNeeds.count() >6>><<set $PTMP_MariaSuggestions to 'Scenario A'>>You send Maria your notes.
+
+<<maria>>Wow, that's heaps of great intel! You're a smart cookie, looks like you've got plenty to go on. I'm happy to be on standby for your meeting if you need help with any curly questions though.<</maria>>
+
+Without hesitation, you <<linkappend "accept Maria's offer. " t8n>><<set $PTM_PSMStandby to true>><<include "PTMP Maria Join Call">>
+<<if $Inv_ClientNeeds.has('they are considering whether to build their own system')>><<say '$player_name'>>One more thing - I know one of the options they're considering is whether to build their own system.<</say>>
+
+<<maria>>Ha! That always works out well, doesn't it. In that case, when you talk to them, make sure you mention <span class="clue"><<linkreplace 'handling historical organisational units'>>handling historical organisational units.<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_Ambush' 'handling historical organisational units'>><</linkreplace>></span>. That should get them thinking - it's a tricky problem that people don't usually design for but Pure does it well.<</maria>><</if>>
+
+You thank Maria for her help. Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<</linkappend>>\
+
+<<elseif $Inv_ClientNeeds.count() >0>><<set _randomItems to $Inv_ClientNeeds.toArray().pluckMany(1)>><<set _randomItems2 to $Inv_ClientDynamics.toArray().pluckMany(1)>>\
+<<say '$player_name'>>Well, one thing I know is <<print _randomItems>>.<</say>>
+
+<<maria>>I see. Well that is fairly common. A lot of the time the best way to discuss a topic depends on the client dynamics and relationships. What can you tell me about that?<</maria>>
+
+<<say '$player_name'>><<if $Inv_ClientDynamics.count() >0>>Well, I can tell you for example that <<print _randomItems2>>.<<else>>To be honest I haven't found out much about that yet.<</if>><</say>>
+
+<<maria>><<if $Inv_ClientDynamics.count() >0>>Yes well I've certainly seen that several times before.<</if>> Ok how about you send me the rest of what you have and I'll have a look and send you some suggestions.<</maria>><<set $PTMP_MariaSuggestions to 'Scenario B'>>\
+
+You thank Maria. Suggestions are always welcome.
+
+<<maria>>Meanwhile, consider finding out more from them before the meeting. In my experience, the more you know going in, the better.<</maria>>
+
+You thank Maria again, and suddenly realise it would be a good idea to have Maria's expertise <<linkappend "ready to hand during your presentation." t8n>><<set $PTM_PSMStandby to true>>
+
+You ask and, happily, she agrees. <<include "PTMP Maria Join Call">>
+
+Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<</linkappend>>
+
+<<elseif $Inv_ClientNeeds.count() == 0>><<say '$player_name'>>Well that's the problem, I don't know much at all.<</say>>
+
+<<maria>>Okaaaay... well I can probably suggest some things based on which stakeholders are involved. Who is going to be at the meeting?<</maria>>
+
+<<say '$player_name'>>The project manager. I'm not sure who else yet, to be honest.<</say>>
+
+<<maria>>Ok. Well maybe find that out first? Otherwise I don't envy you giving a presentation if you don't know who's coming or what they want.<</maria>>
+
+This isn't what you wanted to hear, but you thank Maria for her help anyway.
+
+Do you [[work with what you have now|PTMP Select Features to Present]] or [[try to find out more|PTMP Realise You Need More Info]]?<</if>><</if>>
+
+:: PTMP Maria Join Call
+You feel relieved. Having Maria on standby will be a huge help.
+
+<<say '$player_name'>>I would love that - thanks so much.<</say>>
+
+<<maria>>No problem - send me the details, I'll be there.<</maria>>
+
+
+:: PTMP Ask Amy more stakeholders
+You realise you need another perspective here. As you walk over to see Amy, she sees the look on your face and pre-empts your request.
+
+<<amy>>Coffee?<</amy>>
+
+You nod gratefully. A few minutes later, seated comfortably among the rising aroma of fresh coffee, you [[explain the situation to her|PTMP Ask Amy more stakeholders 2]].
+
+:: PTMP Ask Amy more stakeholders 2
+<<amy>>Think about it from your guy Sean's perspective.<</amy>>
+
+Amy pauses to take a sip.
+
+<<amy>>He's probably just been told by his boss to manage this project. He doesn't necessarily know how to get the right people or who to get, and he's likely to be a bit resistant to bringing in more bodies because it makes his job more complicated.<</amy>>
+
+<<if $Inv_ClientDynamics.has('Sean is fairly new to the role')>><<say '$player_name'>>Well actually he did mention he is fairly new to the role.<</say>>
+
+Amy gestures as if to say, well there you go.<<else>>You consider this for a moment. Maybe Amy has a point.<</if>>
+
+<<amy>>Bottom line - this may be Sean's first rodeo, but it's not yours. In this room, you're the expert on implementing research management systems, right?<</amy>>
+
+You nod at Amy's rhetorical question, as you feel this is exepected of you.
+
+<<amy>>So in fact you have a responsibility to share that expertise and help them avoid making rookie mistakes.<</amy>>
+
+<<say '$player_name'>>I hadn't thought of it like that.<</say>>
+
+<<amy>>You know how the politics works in these places. If they don't equally include everyone in the project from the beginning they'll probably end up having conflicts with those same stakeholders later. Which means...<</amy>>
+
+<<say '$player_name'>>Delays.<</say>>
+
+<<amy>>Exactly. Delays, power struggles, restarts and resets, unwillingness to engage. All stuff that eventually harms uptake of the system.<</amy>>
+
+You spend a few more minutes with Amy until you have both finished your coffees. You ask her how her current deals are going, and share a few laughs. Later, back at your desk, you know exactly what to tell Sean.
+
+* [[Advise Sean to invite the other stakeholders|PTMP Invite more stakeholders][$Rep_Sean to $Rep_Sean + 5; $PTMP_EmailsToSean to $PTMP_EmailsToSean + 1]]
+* [[Let Sean make his own decisions|PTMP Don't invite more stakeholders]]
+
+:: PTMP Maria Suggestions
+<<if $PTMP_MariaSuggestions is 'Scenario A'>><<maria>>Hey, I've been thinking more about your client. The notes you gave me were really thorough, so I thought I'd send over some ideas for what to talk about, depending on who comes to the meeting. Hope this helps!<</maria>>
+<<elseif $PTMP_MariaSuggestions is 'Scenario B'>><<maria>>Hey, thanks for the notes. Here are the suggestions I promised. Hope this helps!<</maria>><</if>>
+
+Looking at Maria's suggestions, you see <span class="clue"><<linkreplace 'plenty of ideas you can use'>>plenty of ideas you can use<<notify 1s 'inventory-update'>>Added to Notes<</notify>><<pickup '$Inv_PTM_TalkingPoints' 'all of Mari's suggestions>><</linkreplace>></span>.
+
+<strong>Library</strong>
+* Managing APC charges
+* Integration with library systems (eg the Z39.50 protocol)
+* How librarians have a role in supporting academic input
+* general strong bibliographic understanding and quality 
+<strong>Grant support team (Research Office)</strong>
+* Award management module
+<strong>Finance people</strong>
+* Integration of finance data like grants and expenditure data from individual grants
+<strong>IT</strong>
+* The XML framework for synchronised import
+* Authentication and Single Sign-On integration opportunities (LDAP, AD, Kerberos, Shibboleth, CAS, etc) 
+<strong>Marketing people</strong>
+* Pure Portal - how to find interesting new work for thought leadership pieces
+<strong>Academics</strong>
+* The "enter once, reuse often" philosophy
+* Pure Portal, the speech about how to respect the university's and their own IP
+
+You thank Maria for this wealth of useful information and turn your attention back to [[putting together your presentation|PTMP Select Features to Present][$PTMP_MariaSuggestions to 'received']].
+

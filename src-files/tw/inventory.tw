@@ -1,0 +1,13 @@
+:: Inventory
+So far, here's what you know:
+
+<strong>General Info</strong>
+<div class="inventory"><<inventory '$Inv_ClientBackground' '\n <span></span>'>></div>
+
+<strong>What you've found out about the client's needs</strong>
+<div class="inventory"><<inventory '$Inv_ClientNeeds' '\n <span></span>'>></div>
+
+<strong>Relationships and dynamics</strong>
+<div class="inventory"><<inventory '$Inv_ClientDynamics' '\n <span></span>'>></div>
+
+<<back>>

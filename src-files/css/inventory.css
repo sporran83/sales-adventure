@@ -1,0 +1,31 @@
+/* Inventory styles */
+
+.inventory span:before {
+    content: "\2022";
+    margin-left: 1rem;
+    padding-right: 1rem;
+    /* display: list-item;
+    list-style-type: square;
+    list-style-position: inside;
+    white-space: pre; */
+}
+
+.inventory2 span {
+    argin-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 3rem;
+    /* display: list-item;
+    list-style-type: square;
+    list-style-position: inside;
+    white-space: pre; */
+}
+
+.clue a {
+  color: #4B0082 !important;
+  background-color: rgba(138,43,226,0.2);
+}
+.clue a:hover, a:focus {
+  filter: brightness(1.1);`
+  text-decoration: none;
+  background-color: transparent;
+}

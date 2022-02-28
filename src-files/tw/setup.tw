@@ -1,0 +1,376 @@
+:: StoryTitle
+Sales Adventure
+
+:: StoryData
+{
+  "ifid": "CEE7FB8B-7F97-47E1-B73A-FAF87CE66F23"
+}
+
+:: StoryInit
+/% Story Initialise Variables %/
+<<set $sales_cycle to 0>>\
+<<set $inventory to []>>\
+
+<<set $colleague_name to "Amy">>\
+<<set $boss_name to "Jeorg">>\
+<<set $client_PM_name to "Sean">>\
+
+/% Setup Inventories %/
+<<newinventory '$Inv_ClientBackground'>>
+<<newinventory '$Inv_ClientNeeds'>>
+<<newinventory '$Inv_ClientDynamics'>>
+<<newinventory '$Inv_UseCases'>>
+<<newinventory '$Inv_Experiences'>>
+<<newinventory '$Inv_ProductKnowledge'>>
+<<newinventory '$Inv_Test' 'a pair of shoes' 'the shirt on your back'>>
+<<newinventory '$Inv_PTM_TalkingPoints'>>
+<<newinventory '$Inv_PTM_Attendees'>>
+<<newinventory '$Inv_PTM_Agenda'>>
+<<newinventory '$Inv_Ambush'>>
+
+
+/% Creating Characters %/
+<<character 'amy' 'images/amy.jpeg'>>
+<<character 'sean' 'images/sean.jpeg'>>
+<<character 'jeorg' 'images/jeorg.jpeg'>>
+<<character 'klaus' 'images/klaus.jpeg'>>
+<<character 'maria' 'images/maria.jpeg'>>
+<<character 'tutorialTom' 'images/tutorial.jpeg'>>
+<<character 'tutorialTerry' 'images/tutorial.jpeg'>>
+
+/% setting up character Rep meters %/
+<<newmeter 'RepBar_Tutorial'>>
+    <<animation 600ms>>
+    <<colors brown brown grey>>
+    <<label 'Tutorial Tom: $Rep_Tutorial' 'white' center>>
+    <<sizing 50% 1.5em>>
+<</newmeter>>
+<<set $Rep_Tutorial to 80, $maxRep_Tutorial to 100>>
+
+<<newmeter 'RepBar_Sean'>>
+    <<animation 600ms>>
+    <<colors blue blue grey>>
+    <<label 'Sean: $Rep_Sean' 'white' center>>
+    <<sizing 50% 1.5em>>
+<</newmeter>>
+<<set $Rep_Sean to 50, $maxRep_Sean to 100>>
+
+<<newmeter 'RepBar_Jeorg'>>
+    <<animation 600ms>>
+    <<colors #6B8E23 #6B8E23 grey>>
+    <<label 'Jeorg: $Rep_Jeorg' 'white' center>>
+    <<sizing 50% 1.5em>>
+<</newmeter>>
+<<set $Rep_Jeorg to 70, $maxRep_Jeorg to 100>>
+
+/% jQuery setup %/
+
+<<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous">><</script>>
+
+<<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">><</script>>
+
+
+:: StoryMenu
+[[Check Your Notes|Inventory]]
+[[Check Reputation|Reputation]]
+/% [[Check Deal Timer|Sales Cycle Counter]] %/
+
+:: Sales Cycle Counter
+So far, you have been working this opportunity for <<print $sales_cycle>> days.
+
+<<back>>
+
+:: UserScript[script]
+
+/*! jQuery v3.6.0 | (c) OpenJS Foundation and other contributors | jquery.org/license */
+
+/* (function ($) {
+  $(document.createElement('script'))
+    .attr({
+      id   : 'script-jquery-core',
+      type : 'text/javascript',
+      src  : 'https://code.jquery.com/jquery-3.6.0.min.js'
+    })
+    .appendTo(document.head);
+})(jQuery);
+
+(function ($) {
+  $(document.createElement('script'))
+    .attr({
+      id   : 'script-jquery-ui',
+      type : 'text/javascript',
+      src  : 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'
+    })
+    .appendTo(document.head);
+})(jQuery); */
+
+
+
+:: UserStylesheet[stylesheet]
+
+
+html {
+  /* Vertical colour gradient */
+  /*background-image: linear-gradient(to bottom,  gainsboro, silver);
+  background-image: -webkit-linear-gradient(top,  gainsboro, silver);*/
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  background-attachment: fixed;
+
+
+
+
+  /* Fallback colour */
+  background-color: silver;
+}
+body {
+  /* Remove default styles */
+  background-color: transparent;
+  margin: 10% 0 0 0;
+  font-size: 100%;
+  /* Used to center the box */
+  text-align: center;
+}
+
+
+
+#passages {
+  /* Box background (white with 70% opacity) */
+  background-color: rgba(255, 255, 255, 1);
+
+  /* Border */
+  border: 2px solid black;
+
+  /* Rounded corners */
+  border-radius: 1em;
+
+  /* Box width */
+  width: 60%;
+
+  /* Center the box */
+  display: inline-block;
+  min-height: 40%;
+  margin:auto;
+  margin-bottom: 5%;
+  padding: 0px;
+}
+
+.passage {
+  margin: 0px;
+  /* Inner margin within the box */
+  padding: 2em;
+
+  /* Text formatting */
+  color: black;
+  font-size: 100%;
+  font-family: 'Raleway', sans-serif;
+  text-align:left;
+  line-height: 1.3em;
+}
+
+/* No sidebar */
+#sidebar {
+  display:none;
+}
+
+/* Links */
+a {
+  color: #FFA500 !important;
+  background-color: rgba(255,219,88,0.2);
+}
+a:hover, a:focus {
+  filter: brightness(1.1);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a.internalLink, a.externalLink {
+  color: rgb(255,219,88);
+}
+a.internalLink:hover, a.externalLink:hover {
+  color: rgb(255,204,51);
+  text-decoration: none;
+}
+
+/* Shrink the page when viewed on devices with a low screen width */
+@media screen and (max-width: 960px) {
+  .passage { font-size: 90%;}
+  #passages { width: 70%; }
+}
+@media screen and (max-width: 840px) {
+  .passage {  font-size: 87.5%; }
+  #passages { width: 80%; }
+}
+@media screen and (max-width: 720px) {
+  .passage { font-size: 75%; }
+  #passages { width: 90%; }
+}
+
+
+/* Email and Speech Boxes */
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
+
+.toast__container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.toast__cell{
+  display:inline-block;
+}
+
+.add-margin{
+  margin-top:20px;
+}
+
+.toast__svg{
+  fill:#fff;
+}
+
+.toast {
+  text-align:left;
+    padding: 0px 0;
+    background-color:rgba(200, 200, 200, .2);
+    border-radius:4px;
+    /* max-width: 500px; */
+    top: 0px;
+    position:relative;
+    box-shadow: 1px 7px 5px -5px rgba(0,0,0,0.2);
+}
+
+
+.toast:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  border-top-left-radius:4px;
+  border-bottom-left-radius: 4px;
+
+}
+
+.toast__icon{
+  position:absolute;
+  top:50%;
+  left:22px;
+  transform:translateY(-50%);
+  width:14px;
+  height:14px;
+  padding: 7px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.toast__type {
+  color: #3e3e3e;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.toast__message {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #878787;
+}
+
+.toast__content{
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.toast__close {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 14px;
+    cursor:pointer;
+    height: 14px;
+    fill:#878787;
+    transform: translateY(-50%);
+}
+
+.toast--green .toast__icon{
+  background-color:#2BDE3F;
+}
+
+.toast--green:before{
+  background-color:#2BDE3F;
+}
+
+.toast--blue .toast__icon{
+  background-color:#1D72F3;
+}
+
+.toast--blue:before{
+  background-color:#1D72F3;
+}
+
+.toast--silver:before{
+  background-color:#silver;
+}
+
+.toast--yellow .toast__icon{
+  background-color:#FFC007;
+}
+
+.toast--yellow:before{
+  background-color:#FFA500;
+}
+
+.speech-bubble {
+  position: relative;
+  background: blue;
+  border-radius: .4em;
+  color: #fff;
+  padding: 10px
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 0.469em solid transparent;
+  border-right-color: blue;
+  border-left: 0;
+  margin-top: -0.469em;
+  margin-left: -0.469em;
+}
+
+
+.speech {
+  // layout
+  position: relative;
+  max-width: 30em;
+  
+  // looks
+  background-color: pink !important;
+  padding: 1.125em 1.5em;
+  border-radius: 1rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.speech::before {
+  // layout
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 100%;
+  left: 1.5em; // offset should move with padding of parent
+  border: .75rem solid transparent;
+  border-top: none;
+
+  // looks
+  border-bottom-color: #fff;
+  filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+}
+

@@ -1,0 +1,136 @@
+:: PTM Meeting Start
+
+You're in the room. All the stakeholders are sitting around the table. There are a few pleasantries and then it's over to you to present.
+
+1. Select a target and a move (stakeholder and need)
+1b. Score + response A/B/C/D
+
+
+:: Start
+<<set $combatscore to 0>>
+<<set $competitordamage to 0>>
+Ok so now we come onto the next topic.
+
+Who do you want to address your next remarks to?
+[[The Right Person|Combat Test 2][$combattarget to 'The Right Person'; $combatselection to 1]]
+[[The Wrong Person|Combat Test 2][$combattarget to 'The Wrong Person'; $combatselection to 0]]
+
+
+:: Combat Test 2
+What need do you want to talk about?
+
+[[The Right Need|Combat Test 3][$combatneed to 'the right need'; $combatmove to 1]]
+[[The Wrong Need|Combat Test 3][$combatneed to 'the wrong need'; $combatmove to 0]]
+
+:: Combat Test 3
+You make eye contact with <<print $combattarget>> and start talking about <<print $combatneed>>.
+<<if $combatselection is 1 and $combatmove is 1>><<set $combatresponse to 'A'>><<include [[Combat Response A]]>>
+<<elseif $combatselection is 1 and $combatmove is 0>><<set $combatresponse to 'B'>><<include [[Combat Response B]]>>
+<<elseif $combatselection is 0 and $combatmove is 1>><<set $combatresponse to 'C'>><<include [[Combat Response C]]>>
+<<elseif $combatselection is 0 and $combatmove is 0>><<set $combatresponse to 'D'>><<include [[Combat Response D]]>>
+<<endif>>
+
+:: Combat Response A
+<<set $combatscore to $combatscore + 4>>
+<<print $combattarget>> leans forward in their chair, looking interested. They ask a follow up question about Y.
+
+You give more info and show some specifics about Y. They start nodding approvingly. "That looks good", they say, "but what about X?"
+
+[[Know the answer|Combat Response A2][$objection to true; $combatscore to $combatscore + 1]]
+[[Don't know the answer|Combat Response A2][$objection to false]]
+
+:: Combat Response A2
+<<if $objection is true>>You know the answer to this one, so you respond confidently. <<print $combattarget>> seems suitably impressed.
+
+Since you are now leading the conversation, you judge whether this is the right moment to [[plant an ambush|Combat Summary][$ambush to true; $combatscore to $combatscore + 5]] or [[leave a landmine|Combat Summary][$landmine to true; $combatscore to $combatscore + 5; $competitordamage to $competitordamage + 5]] (only if you have previously earned one through your preparation. If you haven't, [[click here|Combat Summary]].
+<<elseif $objection is false>>You don't have the answer to this to hand, so you let <<print $combattarget>> know you will look into it.
+<<include "Combat Summary">>
+<<endif>>
+
+:: Combat Response B
+<<print $combattarget>> looks at you sceptically. "That's all well and good", they say, "but what about X?"
+
+[[Know the answer|Combat Response B2][$objection to true; $combatscore to $combatscore + 1]]
+[[Don't know the answer|Combat Response B2][$objection to false]]
+
+:: Combat Response B2
+<<if $objection is true>>You know the answer to this one, so you respond confidently. <<print $combattarget>> seems suitably impressed.
+
+Since you are now leading the conversation, you judge whether this is the right moment to [[plant an ambush|Combat Summary][$ambush to true; $combatscore to $combatscore + 5]] or [[leave a landmine|Combat Summary][$landmine to true; $combatscore to $combatscore + 5; $competitordamage to $competitordamage + 5]] (only if you have previously earned one through your preparation. If you haven't, [[click here|Combat Summary]].
+<<elseif $objection is false>>You don't have the answer to this to hand, so you let <<print $combattarget>> know you will look into it.
+<<include "Combat Summary">>
+<<endif>>
+
+
+:: Combat Response C
+You don't get much response from <<print $combattarget>>, but The Right Person speaks up instead. "That's interesting", they say. "Does that mean we can do X?"
+
+[[Know the answer|Combat Response C2][$objection to true; $combatscore to $combatscore + 1]]
+[[Don't know the answer|Combat Response C2][$objection to false]]
+
+:: Combat Response C2
+<<if $objection is true>>You know the answer to this one, so you respond confidently. <<print $combattarget>> seems suitably impressed.
+
+Since you are now leading the conversation, you judge whether this is the right moment to [[plant an ambush|Combat Summary][$ambush to true; $combatscore to $combatscore + 5]] or [[leave a landmine|Combat Summary][$landmine to true; $combatscore to $combatscore + 5; $competitordamage to $competitordamage + 5]] (only if you have previously earned one through your preparation. If you haven't, [[click here|Combat Summary]].
+<<elseif $objection is false>>You don't have the answer to this to hand, so you let The Right Person know you will look into it.
+<<include "Combat Summary">>
+<<endif>>
+
+:: Combat Response D
+<<set $combatscore to $combatscore - 4>>
+<<print $combattarget>> looks bemused and eventually starts checking their phone. They all wait politely for you to finish, but no-one has any questions.
+<<include "Combat Summary">>
+
+:: Combat Summary
+<<if $ambush is true>>You mention to <<print $combattarget>> that, in your experience, clients often struggle with the Y step if they haven't paid careful attention to Z. You see <<print $combattarget>> looking nervous and leave a discreet pause for this to sink in. But then you tell them that they don't need to worry because Z is built in! <<print $combattarget>> looks relieved. <<endif>>
+<<if $landmine is true>>You tell <<print $combattarget>> that X is something your team has thought long and hard about in the design and have built an elegant solution for it. So important is X to eventual client success that you strongly recommend that <<print $combattarget>> asks other suppliers specifically about this feature and how they address it. You see <<print $combattarget>> taking notes. <<endif>> 
+
+Now it's time to move onto the next section.
+
+You followed combat scenario <<print $combatresponse>>.
+Here's how many points you scored in this section: <<print $combatscore>>
+Here's how much you hurt your competitor's chances: <<print $competitordamage>>
+
+
+:: Next
+
+[Is this interesting? Right message for right stakeholders]
+
+
+- Ask them to tell you things
+- Present slides
+- Demo something
+
+
+
+
+
+
+
+
+
+You ask the grants management people to talk you through what they do with grants and their current workflows and tools.
+
+Attempt to stimulate interest
+Match solution to need
+Overcome objection
+Ambush
+Landmine competitor
+Stall/Defer
+
+
+
+
+ And then I would show how it works for us if the match is decent. If the mass is completely terrible, I would just say that we have a module for something else but that we can support you. And then I would start to talk seriously about how it also can be a threat to a project to start including whole new feature sets like that :-)
+Always leave landmines.
+
+
+
+--
+Meetings are intense. What is the learning moment here?
+It's high pressure - if you are prepared and focussed on your goal, you will be ok. Otherwise you may fuck it up.
+How do we design for that?
+- we put people on the spot
+- we reward earlier preparation
+- we change the pacing to be much shorter and more direct
+- you don't choose what to do next, you follow your agenda pre-prepared
